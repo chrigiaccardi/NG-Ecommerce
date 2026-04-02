@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { AzioniHeader } from "../azioni-header/azioni-header";
 
 

@@ -1,1 +1,16 @@
-<p>azioni-header works!</p>
+<!-- Il div contiene le azioni -->
+<div class="flex items-center gap-2">
+
+    <!-- Il bottone con la direttiva matIconButton prende le specifiche di A Material per un'icona Bottone,
+     il routerLink al link reindirizza alla pagina selezionata-->
+    <button matIconButton routerLink="/lista-desideri">
+        <mat-icon>favorite</mat-icon>
+    </button>
+    <button matIconButton>
+        <mat-icon>shopping_cart</mat-icon>
+    </button>
+
+    <!-- I bottoni Sign In e Sign Up sono bottoni material normali -->
+    <button matButton="tonal"> Sign In </button>
+    <button matButton="filled"> Sign Up </button>
+</div>
