@@ -1,1 +1,8 @@
-<div class="p-4 bg-gray-200">{{ titolo() }}</div>
+// creiamo una toolbar da angular material e gli diamo determinate classi tailwind
+<mat-toolbar class="w-full elevated py-2">
+
+    // il div racchiude con un max di 1200px  
+    <div class="max-w-[1200px] mx-auto w-full">{{ titolo() }}</div>
+    <app-azioni-header />
+</mat-toolbar>
+
