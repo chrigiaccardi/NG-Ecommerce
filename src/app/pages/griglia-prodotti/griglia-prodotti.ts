@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, computed, input, signal } from '@angular/core';
+import { Prodotto } from '../../models/prodotto';
 
 @Component({
   selector: 'app-griglia-prodotti',
@@ -7,7 +8,294 @@ import { Component } from '@angular/core';
   styleUrl: './griglia-prodotti.css',
 })
   
-    // Inseriamo nella classe default per far si che Angular sappia quale classe caricare nel lazy loading di loadComponent
+// Inseriamo nella classe default per far si che Angular sappia quale classe caricare nel lazy loading di loadComponent
 export default class GrigliaProdotti {
+  // inizializziamo categoria con l'input per l'inputBinding della route
+  categoria = input<string>('tutti');
 
-}
+  // inizializziamo prodotti con un signal(wrapper che traccia automaticamente chi lo legge e notifica chi serve).
+  // prodotti: array di interface prodotto è un array vuoto che si riempirà poi dai dati mandati dal server
+  // abbiamo creato con L'ai una lista di prodotti differenti
+  prodotti = signal<Prodotto[]>([
+    // ELETTRONICA
+    {
+      id: '1',
+      name: 'Smartphone XPro 12',
+      description: 'Smartphone con display AMOLED e fotocamera da 64MP.',
+      price: 699.99,
+      imageUrl: 'https://images.unsplash.com/photo-1640936343842-268f9d87e764?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8c21hcnRwaG9uZXxlbnwwfHwwfHx8MA%3D%3D',
+      rating: 4.5,
+      reviewCount: 120,
+      inStock: true,
+      category: 'elettronica'
+    },
+    {
+      id: '2',
+      name: 'Cuffie Wireless NoiseFree',
+      description: 'Cuffie con cancellazione del rumore e autonomia di 30 ore.',
+      price: 129.99,
+      imageUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3VmZmllJTIwd2lyZWxlc3N8ZW58MHx8MHx8fDA%3D',
+      rating: 4.3,
+      reviewCount: 85,
+      inStock: true,
+      category: 'elettronica'
+    },
+    {
+      id: '3',
+      name: 'Smartwatch FitLife',
+      description: 'Orologio intelligente con monitoraggio attività e battito cardiaco.',
+      price: 89.99,
+      imageUrl: 'https://media.istockphoto.com/id/2197192316/it/foto/orologio-intelligente-con-monitoraggio-del-polso-cardiaco-sullo-schermo-isolato-su-grigio-app.webp?a=1&b=1&s=612x612&w=0&k=20&c=gaXd_oC50Tp-93my9QBCky946tXBfl8RmIlMyE6CdJ4=',
+      rating: 4.2,
+      reviewCount: 60,
+      inStock: true,
+      category: 'elettronica'
+    },
+    {
+      id: '4',
+      name: 'Tablet MediaPlus 10',
+      description: 'Tablet da 10 pollici ideale per lavoro e intrattenimento.',
+      price: 249.99,
+      imageUrl: 'https://source.unsplash.com/featured/?tablet',
+      rating: 4.1,
+      reviewCount: 40,
+      inStock: false,
+      category: 'elettronica'
+    },
+
+    // ABBIGLIAMENTO
+    {
+      id: '5',
+      name: 'T-shirt Basic Cotone',
+      description: 'Maglietta in cotone 100% disponibile in vari colori.',
+      price: 14.99,
+      imageUrl: 'https://source.unsplash.com/featured/?tshirt',
+      rating: 4.0,
+      reviewCount: 150,
+      inStock: true,
+      category: 'abbigliamento'
+    },
+    {
+      id: '6',
+      name: 'Jeans Slim Fit',
+      description: 'Jeans aderenti dal design moderno.',
+      price: 49.99,
+      imageUrl: 'https://source.unsplash.com/featured/?jeans',
+      rating: 4.4,
+      reviewCount: 90,
+      inStock: true,
+      category: 'abbigliamento'
+    },
+    {
+      id: '7',
+      name: 'Giacca Invernale WarmPro',
+      description: 'Giacca imbottita resistente al freddo intenso.',
+      price: 119.99,
+      imageUrl: 'https://source.unsplash.com/featured/?winter-jacket',
+      rating: 4.6,
+      reviewCount: 70,
+      inStock: true,
+      category: 'abbigliamento'
+    },
+    {
+      id: '8',
+      name: 'Sneakers Urban Style',
+      description: 'Scarpe sportive comode per uso quotidiano.',
+      price: 69.99,
+      imageUrl: 'https://source.unsplash.com/featured/?sneakers',
+      rating: 4.3,
+      reviewCount: 110,
+      inStock: false,
+      category: 'abbigliamento'
+    },
+
+    // CASA
+    {
+      id: '9',
+      name: 'Lampada LED Moderna',
+      description: 'Lampada da tavolo con luce regolabile.',
+      price: 39.99,
+      imageUrl: 'https://source.unsplash.com/featured/?lamp',
+      rating: 4.2,
+      reviewCount: 55,
+      inStock: true,
+      category: 'casa'
+    },
+    {
+      id: '10',
+      name: 'Set Pentole Acciaio',
+      description: 'Set di pentole in acciaio inox per ogni esigenza.',
+      price: 89.99,
+      imageUrl: 'https://source.unsplash.com/featured/?cookware',
+      rating: 4.5,
+      reviewCount: 75,
+      inStock: true,
+      category: 'casa'
+    },
+    {
+      id: '11',
+      name: 'Aspirapolvere TurboClean',
+      description: 'Aspirapolvere potente e silenzioso.',
+      price: 159.99,
+      imageUrl: 'https://source.unsplash.com/featured/?vacuum-cleaner',
+      rating: 4.4,
+      reviewCount: 65,
+      inStock: true,
+      category: 'casa'
+    },
+    {
+      id: '12',
+      name: 'Cuscino Memory Foam',
+      description: 'Cuscino ergonomico per un sonno confortevole.',
+      price: 29.99,
+      imageUrl: 'https://source.unsplash.com/featured/?pillow',
+      rating: 4.3,
+      reviewCount: 50,
+      inStock: true,
+      category: 'casa'
+    },
+
+    // SPORT
+    {
+      id: '13',
+      name: 'Tappetino Yoga Comfort',
+      description: 'Tappetino antiscivolo per yoga e fitness.',
+      price: 24.99,
+      imageUrl: 'https://source.unsplash.com/featured/?yoga-mat',
+      rating: 4.5,
+      reviewCount: 80,
+      inStock: true,
+      category: 'sport'
+    },
+    {
+      id: '14',
+      name: 'Manubri Regolabili',
+      description: 'Set di pesi regolabili per allenamento a casa.',
+      price: 79.99,
+      imageUrl: 'https://source.unsplash.com/featured/?dumbbells',
+      rating: 4.6,
+      reviewCount: 95,
+      inStock: true,
+      category: 'sport'
+    },
+    {
+      id: '15',
+      name: 'Bici da Città UrbanBike',
+      description: 'Bicicletta comoda per spostamenti urbani.',
+      price: 299.99,
+      imageUrl: 'https://source.unsplash.com/featured/?city-bike',
+      rating: 4.2,
+      reviewCount: 40,
+      inStock: false,
+      category: 'sport'
+    },
+    {
+      id: '16',
+      name: 'Scarpe Running ProRun',
+      description: 'Scarpe leggere per corsa e allenamento.',
+      price: 89.99,
+      imageUrl: 'https://source.unsplash.com/featured/?running-shoes',
+      rating: 4.4,
+      reviewCount: 120,
+      inStock: true,
+      category: 'sport'
+    },
+
+    // LIBRI
+    {
+      id: '17',
+      name: 'Il Mistero della Notte',
+      description: 'Romanzo thriller avvincente.',
+      price: 12.99,
+      imageUrl: 'https://source.unsplash.com/featured/?book',
+      rating: 4.1,
+      reviewCount: 30,
+      inStock: true,
+      category: 'libri'
+    },
+    {
+      id: '18',
+      name: 'Guida alla Programmazione',
+      description: 'Manuale pratico per sviluppatori.',
+      price: 29.99,
+      imageUrl: 'https://source.unsplash.com/featured/?programming-book',
+      rating: 4.7,
+      reviewCount: 60,
+      inStock: true,
+      category: 'libri'
+    },
+    {
+      id: '19',
+      name: 'Cucina Italiana Tradizionale',
+      description: 'Ricette autentiche della cucina italiana.',
+      price: 19.99,
+      imageUrl: 'https://source.unsplash.com/featured/?cookbook',
+      rating: 4.5,
+      reviewCount: 45,
+      inStock: true,
+      category: 'libri'
+    },
+    {
+      id: '20',
+      name: 'Mindfulness Quotidiana',
+      description: 'Libro per migliorare il benessere mentale.',
+      price: 15.99,
+      imageUrl: 'https://source.unsplash.com/featured/?self-help-book',
+      rating: 4.3,
+      reviewCount: 38,
+      inStock: true,
+      category: 'libri'
+    },
+
+    // BELLEZZA
+    {
+      id: '21',
+      name: 'Crema Viso Idratante',
+      description: 'Crema nutriente per tutti i tipi di pelle.',
+      price: 22.99,
+      imageUrl: 'https://source.unsplash.com/featured/?face-cream',
+      rating: 4.4,
+      reviewCount: 70,
+      inStock: true,
+      category: 'bellezza'
+    },
+    {
+      id: '22',
+      name: 'Shampoo Nutriente',
+      description: 'Shampoo delicato per capelli secchi.',
+      price: 9.99,
+      imageUrl: 'https://source.unsplash.com/featured/?shampoo',
+      rating: 4.2,
+      reviewCount: 55,
+      inStock: true,
+      category: 'bellezza'
+    },
+    {
+      id: '23',
+      name: 'Profumo Elegance',
+      description: 'Fragranza raffinata e duratura.',
+      price: 59.99,
+      imageUrl: 'https://source.unsplash.com/featured/?perfume',
+      rating: 4.6,
+      reviewCount: 90,
+      inStock: true,
+      category: 'bellezza'
+    },
+    {
+      id: '24',
+      name: 'Set Trucco Completo',
+      description: 'Kit makeup con tutto il necessario.',
+      price: 39.99,
+      imageUrl: 'https://source.unsplash.com/featured/?makeup',
+      rating: 4.3,
+      reviewCount: 65,
+      inStock: false,
+      category: 'bellezza'
+    }
+  ]);
+
+  // prodotti filtrati: computed (crea un signal derivato, si ricalcola automaticamente ed è readonly)
+  //  legge i due signal prodotti e categoria, filtra prodotti e ritorna i p che hanno la category = alla categoria
+  // mostrata tutta in lowerCase
+  prodottiFiltrati = computed(() => this.prodotti().filter(p => p.category === this.categoria().toLowerCase()));
+};

@@ -1,1 +1,20 @@
-<p>griglia-prodotti works!</p>
+<!-- Creiamo un div con un h1 che replica la categoria selezionata e immessa nella Route -->
+<div class="bg-gray-100 p-6">
+    <h1 class="text-2xl font-bold text-gray-900">
+        {{categoria()}}
+    </h1>
+    <!-- utilizziamo responsive-grid che è già stato impostato nel file generico dello style -->
+    <div class="responsive-grid">
+
+        <!-- creiamo un ciclo for che per ogni prodotto dei prodotti filtrati crei la card
+        e che tenga traccia tramite l'id del prodotto singolo -->
+        @for (prodotto of prodottiFiltrati(); track prodotto.id) {
+        <div class="bg-white cursor-pointer rounded-xl shadow-lg overflow-hidden flex flex-col h-full">
+
+            <!-- inseriamo src nelle [] per avere il property binding e prendere l'url da quello che arriva dal singolo prodotto -->
+            <img [src]="prodotto.imageUrl" alt="" class="w-full h-[300px] object-cover rounded-t-xl">
+        </div>
+        }
+    </div>
+
+</div>
