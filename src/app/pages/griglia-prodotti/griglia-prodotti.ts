@@ -1,17 +1,25 @@
 import { Component, computed, input, signal } from '@angular/core';
 import { Prodotto } from '../../models/prodotto';
+import { CardProdotto } from "../../components/card-prodotto/card-prodotto";
+import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import { RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-griglia-prodotti',
-  imports: [],
+  imports: [CardProdotto, MatSidenavModule,MatListModule, RouterLink],
   templateUrl: './griglia-prodotti.html',
   styleUrl: './griglia-prodotti.css',
 })
   
 // Inseriamo nella classe default per far si che Angular sappia quale classe caricare nel lazy loading di loadComponent
 export default class GrigliaProdotti {
+
   // inizializziamo categoria con l'input per l'inputBinding della route
   categoria = input<string>('tutti');
+  // signal array per tutte le categorie di prodotti
+  categorie = signal<string[]>(['tutti', 'elettronica', 'abbigliamento', 'casa', 'sport', 'libri', 'bellezza'])
 
   // inizializziamo prodotti con un signal(wrapper che traccia automaticamente chi lo legge e notifica chi serve).
   // prodotti: array di interface prodotto è un array vuoto che si riempirà poi dai dati mandati dal server
@@ -56,7 +64,7 @@ export default class GrigliaProdotti {
       name: 'Tablet MediaPlus 10',
       description: 'Tablet da 10 pollici ideale per lavoro e intrattenimento.',
       price: 249.99,
-      imageUrl: 'https://source.unsplash.com/featured/?tablet',
+      imageUrl: 'https://images.unsplash.com/photo-1542751110-97427bbecf20?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dGFibGV0fGVufDB8fDB8fHww',
       rating: 4.1,
       reviewCount: 40,
       inStock: false,
@@ -69,7 +77,7 @@ export default class GrigliaProdotti {
       name: 'T-shirt Basic Cotone',
       description: 'Maglietta in cotone 100% disponibile in vari colori.',
       price: 14.99,
-      imageUrl: 'https://source.unsplash.com/featured/?tshirt',
+      imageUrl: 'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dCUyMHNoaXJ0fGVufDB8fDB8fHww',
       rating: 4.0,
       reviewCount: 150,
       inStock: true,
@@ -80,7 +88,7 @@ export default class GrigliaProdotti {
       name: 'Jeans Slim Fit',
       description: 'Jeans aderenti dal design moderno.',
       price: 49.99,
-      imageUrl: 'https://source.unsplash.com/featured/?jeans',
+      imageUrl: 'https://images.unsplash.com/photo-1714143136372-ddaf8b606da7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8amVhbnMlMjBzbGltJTIwZml0fGVufDB8fDB8fHww',
       rating: 4.4,
       reviewCount: 90,
       inStock: true,
@@ -91,7 +99,7 @@ export default class GrigliaProdotti {
       name: 'Giacca Invernale WarmPro',
       description: 'Giacca imbottita resistente al freddo intenso.',
       price: 119.99,
-      imageUrl: 'https://source.unsplash.com/featured/?winter-jacket',
+      imageUrl: 'https://images.unsplash.com/photo-1715608720717-ac3d1b638e44?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGdpYWNjYSUyMGludmVybmFsZSUyMHdhcm0lMjBwcm98ZW58MHx8MHx8fDA%3D',
       rating: 4.6,
       reviewCount: 70,
       inStock: true,
@@ -102,7 +110,7 @@ export default class GrigliaProdotti {
       name: 'Sneakers Urban Style',
       description: 'Scarpe sportive comode per uso quotidiano.',
       price: 69.99,
-      imageUrl: 'https://source.unsplash.com/featured/?sneakers',
+      imageUrl: 'https://media.istockphoto.com/id/925328590/it/foto/scarpe-da-corsa-su-sfondo-bianco.webp?a=1&b=1&s=612x612&w=0&k=20&c=Iq_UI-BTbS7WHxulBCZ95wrbLJz6EndOC0OfoRAiO_0=',
       rating: 4.3,
       reviewCount: 110,
       inStock: false,
@@ -115,7 +123,7 @@ export default class GrigliaProdotti {
       name: 'Lampada LED Moderna',
       description: 'Lampada da tavolo con luce regolabile.',
       price: 39.99,
-      imageUrl: 'https://source.unsplash.com/featured/?lamp',
+      imageUrl: 'https://images.unsplash.com/photo-1766411503489-c6fe7b008bd6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGFtcGFkYSUyMGxlZCUyMG1vZGVybmF8ZW58MHx8MHx8fDA%3D',
       rating: 4.2,
       reviewCount: 55,
       inStock: true,
@@ -126,7 +134,7 @@ export default class GrigliaProdotti {
       name: 'Set Pentole Acciaio',
       description: 'Set di pentole in acciaio inox per ogni esigenza.',
       price: 89.99,
-      imageUrl: 'https://source.unsplash.com/featured/?cookware',
+      imageUrl: 'https://images.unsplash.com/photo-1584990347193-6bebebfeaeee?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c2V0JTIwcGVudG9sZSUyMGFjY2lhaW98ZW58MHx8MHx8fDA%3D',
       rating: 4.5,
       reviewCount: 75,
       inStock: true,
@@ -137,7 +145,7 @@ export default class GrigliaProdotti {
       name: 'Aspirapolvere TurboClean',
       description: 'Aspirapolvere potente e silenzioso.',
       price: 159.99,
-      imageUrl: 'https://source.unsplash.com/featured/?vacuum-cleaner',
+      imageUrl: 'https://media.istockphoto.com/id/1489556409/it/foto/aspirapolvere-isolato-su-sfondo-bianco.webp?a=1&b=1&s=612x612&w=0&k=20&c=Bl4aBvrj84usnvziUXEzItvz4qxUXu3j4V6G1OGtPfg=',
       rating: 4.4,
       reviewCount: 65,
       inStock: true,
@@ -148,7 +156,7 @@ export default class GrigliaProdotti {
       name: 'Cuscino Memory Foam',
       description: 'Cuscino ergonomico per un sonno confortevole.',
       price: 29.99,
-      imageUrl: 'https://source.unsplash.com/featured/?pillow',
+      imageUrl: 'https://media.istockphoto.com/id/2207660314/it/foto/cuscino-ortopedico-in-memory-foam-per-un-sonno-confortevole.webp?a=1&b=1&s=612x612&w=0&k=20&c=Jpynwqr3fngmOoCLYa9XcXUFtRH6FFK4_m8wj2RgFCg=',
       rating: 4.3,
       reviewCount: 50,
       inStock: true,
@@ -161,7 +169,7 @@ export default class GrigliaProdotti {
       name: 'Tappetino Yoga Comfort',
       description: 'Tappetino antiscivolo per yoga e fitness.',
       price: 24.99,
-      imageUrl: 'https://source.unsplash.com/featured/?yoga-mat',
+      imageUrl: 'https://images.unsplash.com/photo-1592432678016-e910b452f9a2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dGFwcGV0aW5vJTIweW9nYXxlbnwwfHwwfHx8MA%3D%3D',
       rating: 4.5,
       reviewCount: 80,
       inStock: true,
@@ -172,7 +180,7 @@ export default class GrigliaProdotti {
       name: 'Manubri Regolabili',
       description: 'Set di pesi regolabili per allenamento a casa.',
       price: 79.99,
-      imageUrl: 'https://source.unsplash.com/featured/?dumbbells',
+      imageUrl: 'https://images.unsplash.com/photo-1703668984128-b506579acdd2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnVicmklMjByZWdvbGFiaWxpJTIwZ3ltfGVufDB8fDB8fHww',
       rating: 4.6,
       reviewCount: 95,
       inStock: true,
@@ -183,7 +191,7 @@ export default class GrigliaProdotti {
       name: 'Bici da Città UrbanBike',
       description: 'Bicicletta comoda per spostamenti urbani.',
       price: 299.99,
-      imageUrl: 'https://source.unsplash.com/featured/?city-bike',
+      imageUrl: 'https://images.unsplash.com/photo-1627363707801-543bdb44faf3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YmljaSUyMHVyYmFufGVufDB8fDB8fHww',
       rating: 4.2,
       reviewCount: 40,
       inStock: false,
@@ -194,7 +202,7 @@ export default class GrigliaProdotti {
       name: 'Scarpe Running ProRun',
       description: 'Scarpe leggere per corsa e allenamento.',
       price: 89.99,
-      imageUrl: 'https://source.unsplash.com/featured/?running-shoes',
+      imageUrl: 'https://images.unsplash.com/photo-1562183241-b937e95585b6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2NhcnBlJTIwcnVubmluZ3xlbnwwfHwwfHx8MA%3D%3D',
       rating: 4.4,
       reviewCount: 120,
       inStock: true,
@@ -207,7 +215,7 @@ export default class GrigliaProdotti {
       name: 'Il Mistero della Notte',
       description: 'Romanzo thriller avvincente.',
       price: 12.99,
-      imageUrl: 'https://source.unsplash.com/featured/?book',
+      imageUrl: 'https://images.unsplash.com/photo-1610703032634-182905cc3d7b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bGlicm8lMjBpbCUyMG1pc3Rlcm9kJTIwZWxsYSUyMG5vdGV8ZW58MHx8MHx8fDA%3D',
       rating: 4.1,
       reviewCount: 30,
       inStock: true,
@@ -218,7 +226,7 @@ export default class GrigliaProdotti {
       name: 'Guida alla Programmazione',
       description: 'Manuale pratico per sviluppatori.',
       price: 29.99,
-      imageUrl: 'https://source.unsplash.com/featured/?programming-book',
+      imageUrl: 'https://images.unsplash.com/photo-1565229284535-2cbbe3049123?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGxpYnJvJTIwcHJvZ3JhbW1hemlvbmV8ZW58MHx8MHx8fDA%3D',
       rating: 4.7,
       reviewCount: 60,
       inStock: true,
@@ -229,7 +237,7 @@ export default class GrigliaProdotti {
       name: 'Cucina Italiana Tradizionale',
       description: 'Ricette autentiche della cucina italiana.',
       price: 19.99,
-      imageUrl: 'https://source.unsplash.com/featured/?cookbook',
+      imageUrl: 'https://images.unsplash.com/photo-1627907228175-2bf846a303b4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGlicm8lMjBjdWNpbmF8ZW58MHx8MHx8fDA%3D',
       rating: 4.5,
       reviewCount: 45,
       inStock: true,
@@ -240,7 +248,7 @@ export default class GrigliaProdotti {
       name: 'Mindfulness Quotidiana',
       description: 'Libro per migliorare il benessere mentale.',
       price: 15.99,
-      imageUrl: 'https://source.unsplash.com/featured/?self-help-book',
+      imageUrl: 'https://images.unsplash.com/photo-1760161627217-3f0124023664?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bGlicm8lMjBtaW5kZnVsbG5lc3N8ZW58MHx8MHx8fDA%3D',
       rating: 4.3,
       reviewCount: 38,
       inStock: true,
@@ -253,7 +261,7 @@ export default class GrigliaProdotti {
       name: 'Crema Viso Idratante',
       description: 'Crema nutriente per tutti i tipi di pelle.',
       price: 22.99,
-      imageUrl: 'https://source.unsplash.com/featured/?face-cream',
+      imageUrl: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y3JlYW0lMjB2aXNvfGVufDB8fDB8fHww',
       rating: 4.4,
       reviewCount: 70,
       inStock: true,
@@ -264,7 +272,7 @@ export default class GrigliaProdotti {
       name: 'Shampoo Nutriente',
       description: 'Shampoo delicato per capelli secchi.',
       price: 9.99,
-      imageUrl: 'https://source.unsplash.com/featured/?shampoo',
+      imageUrl: 'https://images.unsplash.com/photo-1701992678972-d5a053ad0fb0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2hhbXBvb3xlbnwwfHwwfHx8MA%3D%3D',
       rating: 4.2,
       reviewCount: 55,
       inStock: true,
@@ -275,7 +283,7 @@ export default class GrigliaProdotti {
       name: 'Profumo Elegance',
       description: 'Fragranza raffinata e duratura.',
       price: 59.99,
-      imageUrl: 'https://source.unsplash.com/featured/?perfume',
+      imageUrl: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZnVtb3xlbnwwfHwwfHx8MA%3D%3D',
       rating: 4.6,
       reviewCount: 90,
       inStock: true,
@@ -286,7 +294,7 @@ export default class GrigliaProdotti {
       name: 'Set Trucco Completo',
       description: 'Kit makeup con tutto il necessario.',
       price: 39.99,
-      imageUrl: 'https://source.unsplash.com/featured/?makeup',
+      imageUrl: 'https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c2V0JTIwdHJ1Y2NvfGVufDB8fDB8fHww',
       rating: 4.3,
       reviewCount: 65,
       inStock: false,
@@ -297,5 +305,14 @@ export default class GrigliaProdotti {
   // prodotti filtrati: computed (crea un signal derivato, si ricalcola automaticamente ed è readonly)
   //  legge i due signal prodotti e categoria, filtra prodotti e ritorna i p che hanno la category = alla categoria
   // mostrata tutta in lowerCase
-  prodottiFiltrati = computed(() => this.prodotti().filter(p => p.category === this.categoria().toLowerCase()));
-};
+  prodottiFiltrati = computed(() => {
+
+    // se categoria è uguale a tutti ritorna tutti i prodotti, se no ritorna i prodotti filtrati in base alla categoria
+    if (this.categoria() === 'tutti') return this.prodotti();
+    return this.prodotti().filter(p => p.category === this.categoria().toLowerCase());
+  });
+
+  aggiungiAlCarrello(prodotto:Prodotto) {
+    
+  }
+}

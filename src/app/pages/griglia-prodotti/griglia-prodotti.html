@@ -1,20 +1,39 @@
-<!-- Creiamo un div con un h1 che replica la categoria selezionata e immessa nella Route -->
-<div class="bg-gray-100 p-6">
-    <h1 class="text-2xl font-bold text-gray-900">
-        {{categoria()}}
-    </h1>
-    <!-- utilizziamo responsive-grid che è già stato impostato nel file generico dello style -->
-    <div class="responsive-grid">
+<!-- creiamo la sidenav per la selezione delle categorie da visualizzare -->
+<mat-sidenav-container>
+    <!-- sidenav crea di fianco (side, sx) o sopra (over) lo spazio per i filtri opened per aperta (true) o chiusa (false)-->
+    <mat-sidenav mode="side" opened="true">
+        <!-- creiamo la lista selezionabile delle categorie per filtrare i prodotti -->
+        <div class="p-6">
+            <h2 class="text-lg text-gray-900">Categorie</h2>
+            <mat-nav-list>
 
-        <!-- creiamo un ciclo for che per ogni prodotto dei prodotti filtrati crei la card
-        e che tenga traccia tramite l'id del prodotto singolo -->
-        @for (prodotto of prodottiFiltrati(); track prodotto.id) {
-        <div class="bg-white cursor-pointer rounded-xl shadow-lg overflow-hidden flex flex-col h-full">
+                <!-- per ogni categoria nell'array categorie creiamo un elemento list item selezionabile e cliccabile -->
+                @for (categoria of categorie(); track categoria) {
 
-            <!-- inseriamo src nelle [] per avere il property binding e prendere l'url da quello che arriva dal singolo prodotto -->
-            <img [src]="prodotto.imageUrl" alt="" class="w-full h-[300px] object-cover rounded-t-xl">
+                    <!-- utilizziamo routerLink per collegare ogni list-item ad una route specifica dentro l'array categorie -->
+                    <mat-list-item class="my-2" [routerLink]="['/prodotti', categoria]">
+                        <span matListItemTitle> {{categoria}} </span>
+                    </mat-list-item>
+                }
+            </mat-nav-list>
         </div>
-        }
-    </div>
+    </mat-sidenav>
 
-</div>
+    <!-- sidenav- content il contenuto da visualizzare integralmente a dx-->
+    <mat-sidenav-content lass="bg-gray-100 p-6 h-full">
+        <h1 class="text-2xl font-bold text-gray-900 m-6"> {{categoria()}} </h1>
+
+        <!-- utilizziamo responsive-grid che è già stato impostato nel file generico dello style -->
+        <div class="responsive-grid">
+
+            <!-- creiamo un ciclo for che per ogni prodotto dei prodotti filtrati crei la card
+        e che tenga traccia tramite l'id del prodotto singolo -->
+            @for (prodotto of prodottiFiltrati(); track prodotto.id) {
+            <!-- creiamo un componente separato riutilizzabile per la card e con il property binding
+             introduciamo i dati del prodotto nell'input prodotto creato in card-prodotto.
+             Riceviamo l'evento in emissione da app-card-prodotto per riceverlo nel metodo aggiungiAlCarrello -->
+            <app-card-prodotto [prodotto]="prodotto" (clickAcquista)="aggiungiAlCarrello($event)" />
+            }
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

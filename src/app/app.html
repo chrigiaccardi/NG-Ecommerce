@@ -1,2 +1,5 @@
-<app-header />
-<router-outlet />
+<!-- header z-10 e relative imposta relative come position e z-index 10 per renderlo elevato di posizione e far vedere l'ombra sotto -->
+<app-header class="z-10 relative"/>
+<div class="h-[calc(100%-64px)] overflow-auto">
+    <router-outlet />
+</div>
