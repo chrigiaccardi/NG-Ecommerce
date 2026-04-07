@@ -1,7 +1,15 @@
-<div class="bg-white cursor-pointer rounded-xl shadow-lg overflow-hidden flex flex-col h-full">
+<div class="relative bg-white cursor-pointer rounded-xl shadow-lg overflow-hidden flex flex-col h-full">
 
     <!-- inseriamo src nelle [] per avere il property binding e prendere l'url da quello che arriva dal singolo prodotto -->
     <img [src]="prodotto().imageUrl" alt="" class="w-full h-[300px] object-cover rounded-t-xl">
+
+
+    <!-- Inseriamo un piccolo toggle con il cuore così che sia il tasto azione per aggiungere il prodotto
+     alla lista desideri -->
+     <button class="!absolute z-10 top-3 right-3 w-10 h-10 rounded-full !bg-white border-0 shadow-md flex item-center justify-center cursor-pionter transition-all duration-200 hover:shadow-lg"
+     [class]="presenteNellaListaDesideri() ? '!text-red-500' : 'text-gray-400' " matIconButton (click)="toggleListaDesideri(prodotto())">
+        <mat-icon>favorite</mat-icon>
+     </button>
 
     <!-- in questo div ci sono tutte le altre info della card -->
     <div class="p-5 flex flex-col flex-1">

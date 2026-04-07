@@ -8,11 +8,15 @@
             <mat-nav-list>
 
                 <!-- per ogni categoria nell'array categorie creiamo un elemento list item selezionabile e cliccabile -->
-                @for (categoria of categorie(); track categoria) {
+                @for (cat of categorie(); track cat) {
 
-                    <!-- utilizziamo routerLink per collegare ogni list-item ad una route specifica dentro l'array categorie -->
-                    <mat-list-item class="my-2" [routerLink]="['/prodotti', categoria]">
-                        <span matListItemTitle> {{categoria}} </span>
+                    <!-- utilizziamo routerLink per collegare ogni list-item ad una route specifica dentro l'array categorie.
+                     Activated inserisce la selezione della categoria colorando lo sfondo e indicando qual'è attivata-->
+                    <mat-list-item [activated]="cat === categoria()" class="my-2" [routerLink]="['/prodotti', cat]">
+                        
+                        <!-- titleCase è una pipe che importiamo per far si che la 1a lettera sia maiuscola.
+                         Inseriamo un conditional binding per dire che se la cat è uguale a categoria allora testo bianco altrimenti null -->
+                        <span matListItemTitle class="font-medium" [class]="cat === categoria() ? '!text-white': null "> {{cat | titlecase}} </span>
                     </mat-list-item>
                 }
             </mat-nav-list>
@@ -21,14 +25,16 @@
 
     <!-- sidenav- content il contenuto da visualizzare integralmente a dx-->
     <mat-sidenav-content lass="bg-gray-100 p-6 h-full">
-        <h1 class="text-2xl font-bold text-gray-900 m-6"> {{categoria()}} </h1>
-
+        <h1 class="text-2xl font-bold text-gray-900 m-2"> {{categoria() | titlecase}} </h1>
+        <p class="text-base text-gray-600 m-2"> {{store.prodottiFiltrati().length}} prodotti trovati</p>
+        
         <!-- utilizziamo responsive-grid che è già stato impostato nel file generico dello style -->
         <div class="responsive-grid">
 
             <!-- creiamo un ciclo for che per ogni prodotto dei prodotti filtrati crei la card
         e che tenga traccia tramite l'id del prodotto singolo -->
-            @for (prodotto of prodottiFiltrati(); track prodotto.id) {
+            @for (prodotto of store.prodottiFiltrati(); track prodotto.id) {
+
             <!-- creiamo un componente separato riutilizzabile per la card e con il property binding
              introduciamo i dati del prodotto nell'input prodotto creato in card-prodotto.
              Riceviamo l'evento in emissione da app-card-prodotto per riceverlo nel metodo aggiungiAlCarrello -->

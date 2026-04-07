@@ -2,8 +2,9 @@
 <div class="flex items-center gap-2">
 
     <!-- Il bottone con la direttiva matIconButton prende le specifiche di A Material per un'icona Bottone,
-     il routerLink al link reindirizza alla pagina selezionata-->
-    <button matIconButton routerLink="/lista-desideri">
+     il routerLink al link reindirizza alla pagina selezionata.
+     Con il matBadge che visualizza il contatore lo impostiamo come il signal computer creato in store-->
+    <button matIconButton routerLink="/lista-desideri" [matBadge]="store.conteggioListaDesideri()" [matBadgeHidden]="store.conteggioListaDesideri() === 0">
         <mat-icon>favorite</mat-icon>
     </button>
     <button matIconButton>

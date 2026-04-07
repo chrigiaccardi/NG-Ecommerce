@@ -9,6 +9,9 @@
 @use '@angular/material' as mat;
 @use 'tailwindcss';
 
+// ngxpert Hot-Toast è una libreria leggera per notifiche toast moderne e personalizzabili (ng add @ngxpert/hot-toast)
+@use '@ngxpert/hot-toast/styles';
+
 html {
   @include mat.theme(
     (
