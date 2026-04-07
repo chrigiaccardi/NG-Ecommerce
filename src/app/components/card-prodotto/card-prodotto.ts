@@ -28,9 +28,9 @@ export class CardProdotto {
   // creiamo il metodo per poter aggiungere il prodotto alla lista desideri
   toggleListaDesideri(prodotto: Prodotto) {
     if (this.presenteNellaListaDesideri()) {
-      // rimuovi il prodotto
+      this.store.rimuoviDallaListaDesideri(prodotto);
     } else {
-      this.store.aggiungiAllaListaDesideri(prodotto);
+      this.store.aggiungiDallaListaDesideri(prodotto);
     }
   }
 }

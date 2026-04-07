@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { BottoneIndietro } from "../../components/bottone-indietro/bottone-indietro";
 
 @Component({
   selector: 'app-lista-desideri',
-  imports: [],
+  imports: [BottoneIndietro],
   templateUrl: './lista-desideri.html',
   styleUrl: './lista-desideri.css',
 })

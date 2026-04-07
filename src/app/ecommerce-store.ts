@@ -324,7 +324,7 @@ export const EcommerceStore = signalStore(
         setCategoria: signalMethod<string>((categoria: string) => {
             patchState(store, {categoria})
         }),
-        aggiungiAllaListaDesideri: (prodotto: Prodotto) => {
+        aggiungiDallaListaDesideri: (prodotto: Prodotto) => {
             // prendamo lo stato attuale della lista desideri (signal)
             const aggiornamentoItemListDesideri = produce(store.listaDesideriItems(), (draft) => {
               // crea una copia mutabile del signal con immer (installato antecedente npm i immer)
@@ -337,7 +337,14 @@ export const EcommerceStore = signalStore(
             // aggiorna la lista desideri con l'ultimo aggiornamento
             patchState(store, { listaDesideriItems: aggiornamentoItemListDesideri });
             // utilizziamo il toaster per mandare un 'popup' all'utente e confermare l'aggiunta del prodotto alla lista desideri
-            toaster.success('Prodotto aggiunto alla Lista Desideri')
+            toaster.success('Prodotto aggiunto dalla Lista Desideri')
+      },
+        rimuoviDallaListaDesideri: (prodotto: Prodotto) => {
+          patchState(store, {
+            // aggiorna gli item filtrando tutti quelli che sono diversi e di conseguenza togliendo quello con id uguale
+            listaDesideriItems: store.listaDesideriItems().filter((p) => p.id !== prodotto.id)
+          });
+          toaster.success('Prodotto rimosso dalla Lista Desideri');
         }
     }))
 )
