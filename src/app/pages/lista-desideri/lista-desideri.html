@@ -14,12 +14,19 @@
             <!-- la card prodotto usa il property binding visto che l'abbiamo fatta riutilizzabile e prende i dati dallo store -->
             @for (prodotto of store.listaDesideriItems(); track prodotto.id) {
                 <app-card-prodotto [prodotto]="prodotto"> 
-                    <!-- per vere bottoni toggle differenti solo nell'icona creiamo un componente a parte e gli passiamo i prodotti -->
-                    <app-bottone-toggle class="!absolute z-10 top-3 right-3 " [prodotto]="prodotto"/>
+                    <button
+                        class="!absolute z-10 top-3 right-3 w-10 h-10 rounded-xl !bg-white border-0 shadow-md flex items-center justify-center cursor-pointer transition-all duration-200 hover:shadow-lg"
+                        matIconButton (click)="store.rimuoviDallaListaDesideri(prodotto)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
                 </app-card-prodotto>
             }
         </div>
+        <!-- Creiamo un bottone che pulisca la lista dei desideri completamente -->
+        <div class="mt-8 flex justify-center">
+            <button matButton="outlined" class="danger" (click)="store.pulisciListaDesideri()"> Pulisci la Lista Desideri</button>
+        </div>
      } @else {
-
+        <app-lista-desideri-vuota />
      }
 </div>

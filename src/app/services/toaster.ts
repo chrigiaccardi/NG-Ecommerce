@@ -1,4 +1,4 @@
-import { Injectable,inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HotToastService } from '@ngxpert/hot-toast';
 
 @Injectable({

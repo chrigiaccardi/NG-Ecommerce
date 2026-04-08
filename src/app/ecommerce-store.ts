@@ -1,19 +1,21 @@
 // Questo file viene creato per contenere tutti i prodotti ed avere un file condivisibile ovunque.
+// Per questo utilizziamo NGRX Signals Store che istalliamo (ng add @ngrx/signals).
+// È basato sui signals nativi, withState definisce lo stato iniziale, withComputed si ricalcola automaticamente
+// quando cambiano le dipendenze e withMethods sono le funzioni per aggiornare lo sato.
+// devono sempre andare in questo ordine presiso: withState, withComputed, withMethods.
 
 import { computed, inject } from "@angular/core";
 import { Prodotto } from "./models/prodotto"
 import { patchState, signalMethod, signalStore, withComputed, withMethods, withState } from '@ngrx/signals'
 import { produce } from 'immer';
 import { Toaster } from "./services/toaster";
+import { ProdottiCarrello } from "./models/prodotti-carrello";
 
-// Per questo utilizziamo NGRX Signals Store che istalliamo (ng add @ngrx/signals).
-// È basato sui signals nativi, withState definisce lo stato iniziale, withComputed si ricalcola automaticamente
-// quando cambiano le dipendenze e withMethods sono le funzioni per aggiornare lo sato.
-// devono sempre andare in questo ordine presiso: withState, withComputed, withMethods.
 export type EcommerceState = {
     prodotti: Prodotto[];
     categoria: string;
     listaDesideriItems: Prodotto[];
+    prodottiCarrello: ProdottiCarrello[];
 }
 
 export const EcommerceStore = signalStore(
@@ -300,7 +302,8 @@ export const EcommerceStore = signalStore(
     }
         ],
         categoria: 'tutti',
-        listaDesideriItems: []
+        listaDesideriItems: [],
+        prodottiCarrello: []
     }as EcommerceState),
     withComputed((store) => ({
         // prodotti filtrati: computed (crea un signal derivato, si ricalcola automaticamente ed è readonly)
@@ -345,6 +348,28 @@ export const EcommerceStore = signalStore(
             listaDesideriItems: store.listaDesideriItems().filter((p) => p.id !== prodotto.id)
           });
           toaster.success('Prodotto rimosso dalla Lista Desideri');
+      },
+        pulisciListaDesideri: () => {
+          // aggiorna la lista desideri ad un array vuoto quindi cancella tutti i prodotti
+        patchState(store, { listaDesideriItems: [] })
+      },
+      aggiungiAlCarrello: (prodotto: Prodotto, quantita = 1) => {
+          // istanziamo l'esistenza del prodotto per controllare subito se il prodotto esiste oppure no
+        const esistenzaProdotto = store.prodottiCarrello().findIndex(i => i.prodotto.id === prodotto.id);
+        
+        // utilizziamo immer per una copia immutabile e una modifica sicura
+        const aggiornamentoItemCarrello = produce(store.prodottiCarrello(), (draft) => {
+          if (esistenzaProdotto !== -1) {
+            draft[esistenzaProdotto].quantita += quantita;
+            return;
+          }
+          draft.push({
+            prodotto, quantita
+          })
+        });
+
+        patchState(store, {prodottiCarrello: aggiornamentoItemCarrello})
         }
+
     }))
 )

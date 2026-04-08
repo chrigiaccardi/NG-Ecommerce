@@ -2,11 +2,13 @@ import { Component, inject } from '@angular/core';
 import { BottoneIndietro } from "../../components/bottone-indietro/bottone-indietro";
 import { EcommerceStore } from '../../ecommerce-store';
 import { CardProdotto } from "../../components/card-prodotto/card-prodotto";
-import { BottoneToggle } from "../../components/bottone-toggle/bottone-toggle";
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { ListaDesideriVuota } from "./lista-desideri-vuota/lista-desideri-vuota";
 
 @Component({
   selector: 'app-lista-desideri',
-  imports: [BottoneIndietro, CardProdotto, BottoneToggle],
+  imports: [BottoneIndietro, CardProdotto, MatIconModule, MatButtonModule, ListaDesideriVuota],
   templateUrl: './lista-desideri.html',
   styleUrl: './lista-desideri.css',
 })

@@ -1,7 +1,7 @@
 <!-- Il bottone indietro lo configuriamo per riutilizzarlo anche in altri componenti.
  Il router link con andare verso nuoto e il ?? null non lo fa creshare ma mi da la possibilita,
  di impostarlo dal parent quando utilizzo il component chiamando il metodo (andareVerso)="..." -->
- <button matButton="text" [routerLink]="andareVerso() ?? null" class="-ms-2 flex items-center gap-1">
+ <button matButton="text" [routerLink]="andareVerso() ?? null" [ngClass]="store.conteggioListaDesideri() > 0 ? '-ms-2 flex items-center gap-1' : '!hidden' ">
     <mat-icon>arrow_back</mat-icon>
     <!-- ng content replica ciò che scriviamo all'interno dei tags del componente nel parent -->
     <ng-content />

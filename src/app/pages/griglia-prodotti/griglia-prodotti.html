@@ -39,6 +39,7 @@
              introduciamo i dati del prodotto nell'input prodotto creato in card-prodotto.
              Riceviamo l'evento in emissione da app-card-prodotto per riceverlo nel metodo aggiungiAlCarrello -->
             <app-card-prodotto [prodotto]="prodotto" (clickAcquista)="aggiungiAlCarrello($event)">
+                                    <!-- per vere bottoni toggle differenti solo nell'icona creiamo un componente a parte e gli passiamo i prodotti -->
                     <app-bottone-toggle class="!absolute z-10 top-3 right-3" [prodotto]="prodotto" />
             </app-card-prodotto>
             }
