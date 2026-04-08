@@ -6,11 +6,12 @@ import {MatListModule} from '@angular/material/list';
 import { RouterLink } from '@angular/router';
 import { TitleCasePipe } from '@angular/common';
 import { EcommerceStore } from '../../ecommerce-store';
+import { BottoneToggle } from "../../components/bottone-toggle/bottone-toggle";
 
 
 @Component({
   selector: 'app-griglia-prodotti',
-  imports: [CardProdotto, MatSidenavModule, MatListModule, RouterLink, TitleCasePipe],
+  imports: [CardProdotto, MatSidenavModule, MatListModule, RouterLink, TitleCasePipe, BottoneToggle],
   templateUrl: './griglia-prodotti.html',
   styleUrl: './griglia-prodotti.css',
 })

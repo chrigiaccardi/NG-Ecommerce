@@ -11,7 +11,6 @@ import {MatIconModule} from '@angular/material/icon';
   styleUrl: './bottone-indietro.css',
 })
 export class BottoneIndietro {
-  label = input('');
 
   // andare verso resta vuoto così che dal parent posso impostarlo io ed avere un componente
   // bottone riutilizzabile

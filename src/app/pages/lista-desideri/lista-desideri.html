@@ -1,4 +1,25 @@
 <!-- iniziamo a creare la pagina della lista dei desideri -->
 <div class="mx-auto max-w-[1200px] py-6 px-4">
-    <app-bottone-indietro label="Continua lo Shopping" andareVerso="/prodotti/tutti"/>
+    <!-- Il testo lo inseriamo all'interno per l'ng-content che abbiamo dentro il componente invece andare verso dinamicamente inserisco il persorso da navigare al click -->
+    <app-bottone-indietro class="mb-6" andareVerso="/prodotti/tutti"> Continua lo Shopping </app-bottone-indietro>
+
+    <!-- Creiamo un condizionale if: se ci sono prodotti nella lista desideri li visualizza altrimenti visualizza altro se vuoto -->
+     @if (store.conteggioListaDesideri() > 0) {
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold"> La mia Lista Desideri</h1>
+            <span class="text-gray-500 text-xl">{{store.conteggioListaDesideri()}} 
+                {{store.conteggioListaDesideri() === 1 ? 'prodotto' : 'prodotti'}}</span>
+        </div>
+        <div class="responsive-grid">
+            <!-- la card prodotto usa il property binding visto che l'abbiamo fatta riutilizzabile e prende i dati dallo store -->
+            @for (prodotto of store.listaDesideriItems(); track prodotto.id) {
+                <app-card-prodotto [prodotto]="prodotto"> 
+                    <!-- per vere bottoni toggle differenti solo nell'icona creiamo un componente a parte e gli passiamo i prodotti -->
+                    <app-bottone-toggle class="!absolute z-10 top-3 right-3 " [prodotto]="prodotto"/>
+                </app-card-prodotto>
+            }
+        </div>
+     } @else {
+
+     }
 </div>
