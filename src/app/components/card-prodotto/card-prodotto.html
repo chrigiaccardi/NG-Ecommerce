@@ -1,7 +1,7 @@
 <div class="relative bg-white cursor-pointer rounded-xl shadow-lg overflow-hidden flex flex-col h-full">
 
     <!-- inseriamo src nelle [] per avere il property binding e prendere l'url da quello che arriva dal singolo prodotto -->
-    <img [src]="prodotto().imageUrl" alt="" class="w-full h-[300px] object-cover rounded-t-xl">
+    <img [src]="prodotto().imageUrl" [alt]="prodotto().name" class="w-full h-[300px] object-cover rounded-t-xl">
 
 
     <!-- Inseriamo un piccolo toggle con il cuore così che sia il tasto azione per aggiungere il prodotto

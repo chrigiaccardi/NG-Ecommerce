@@ -2,8 +2,8 @@
 <div appPannelloCarrello>
     <h2 class="text-2xl font-bold mb-4">{{store.conteggioCarrello()}} {{store.conteggioCarrello() === 1 ? 'prodotto' : 'prodotti'}} nel Carrello</h2>
     <div class="flex flex-col gap-6">
-        @for(prodotto of store.prodottiCarrello(); track prodotto.id) {
-            
+        @for(prodotto of store.prodottiCarrello(); track prodotto.prodotto.id) {
+            <app-pannello-prodotti-carrello [prodotto]="prodotto"/>
         }
     </div>
 
