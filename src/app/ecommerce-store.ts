@@ -10,6 +10,7 @@ import { patchState, signalMethod, signalStore, withComputed, withMethods, withS
 import { produce } from 'immer';
 import { Toaster } from "./services/toaster";
 import { ProdottiCarrello } from "./models/prodotti-carrello";
+import { findIndex } from "rxjs";
 
 export type EcommerceState = {
     prodotti: Prodotto[];
@@ -22,6 +23,7 @@ export const EcommerceStore = signalStore(
     // providedIn : -> root rende il signalStore globale a livello di scope e useremo la funzione inject
     // per iniettarlo nel componente dove ci servono questi specifici dati
     { providedIn: 'root' },
+    
     // withState definisce lo stato iniziale, i vari signals iniziali pronti per essere modificati o utilizzati
     withState({
         prodotti: [
@@ -304,8 +306,10 @@ export const EcommerceStore = signalStore(
         categoria: 'tutti',
         listaDesideriItems: [],
         prodottiCarrello: []
-    }as EcommerceState),
-  withComputed((store) => ({
+    } as EcommerceState),
+    
+    // withComputed setta e definisce gli aggiornamenti finali dei signal
+    withComputed((store) => ({
     // prodotti filtrati: computed (crea un signal derivato, si ricalcola automaticamente ed è readonly)
     //  legge i due signal prodotti e categoria, filtra prodotti e ritorna i p che hanno la category = alla categoria
     // mostrata tutta in lowerCase
@@ -324,7 +328,7 @@ export const EcommerceStore = signalStore(
     // 0 è il valore iniziale e ogni volta somma la quantità dell'item all'accomulatore partendo da 0.
     // il matBadge così si aggiorna non in base ai prodotti nell'array ma alla quantità totale dell'array.
     conteggioCarrello: computed(() => store.prodottiCarrello().reduce((acc, item) => acc + item.quantita, 0)),
-  })),
+    })),
   
     // con withMethod creiamo dei metodi per aggiornare gli stati, in questo caso set categoria accoglie in input una categoria string
     // e la va a settare nello store aggiornando solamente lo stato categoria.
@@ -383,7 +387,14 @@ export const EcommerceStore = signalStore(
 
         // Sia qua che sopra utilizziamo il -1 perchè l'array parte da 0 e quindi -1 vuol dire che non esiste il prodotto nell'array
         toaster.success(esistenzaProdotto !== -1 ? 'Prodotto Nuovamente Aggiunto' : 'Prodotto aggiunto al Carrello')
-        }
+      },
+      setQuantitaProdotto: (params:{idProdotto: string, quantita: number } ) => {
+        const index = store.prodottiCarrello().findIndex(c => c.prodotto.id = params.idProdotto)
+        const aggiornamento = produce(store.prodottiCarrello(), (draft) => {
+          draft[index].quantita = params.quantita
+        });
+        patchState(store, {prodottiCarrello: aggiornamento})
+      }
 
     }))
 )

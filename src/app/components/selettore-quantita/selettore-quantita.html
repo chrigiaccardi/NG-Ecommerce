@@ -1,0 +1,17 @@
+<!-- Questo selettore delle quantità del prodotto è un componente riutilizzabile -->
+ <div class="flex items-center gap-3">
+
+    <!-- Creiamo 2 bottoni - e + per incrementare e decrementare la quantità e in mezzo la quantità dinamica.
+     per il bottone del - aggiungiamo il disabilitato se la quantità è 1 così da non poterlo far andare a 0 o in negativo. -->
+    <div class="inline-flex items-center">
+
+        <!-- con il click emettiamo il valore per aggiornare la quantita di -1 o +1 alla quantita nel parent -->
+        <button matIconButton [disabled]="quantita() === 1" (click)="quantitaAggiornata.emit(quantita() - 1)">
+            <mat-icon>remove</mat-icon>
+        </button>
+        <div class="px-3">{{quantita()}}</div>
+        <button matIconButton (click)="quantitaAggiornata.emit(quantita() + 1)">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+ </div>

@@ -1,5 +1,31 @@
 <div class="grid grid-cols-3 grid-cols-[3fr_1fr_1fr]">
     <div class="flex items-center gap-4">
+
+        <!-- con i property binding src e alt vengono passati dai dati che arrivano dal parent -->
         <img [src]="prodotto().prodotto.imageUrl" [alt]="prodotto().prodotto.name" class="w-24 h-24 rounded-lg object-cover">
+        
+        <!-- creiamo un div, così che stia a lato della foto, che contenga il nome del prodotto e sotto il prezzo -->
+        <div>
+            <div class="text-gray-900 text-lg font-semibold"> {{prodotto().prodotto.name}} </div>
+            <div class="text-gray-600 text-lg"> {{prodotto().prodotto.price | currency: 'EUR': 'symbol'}} </div>
+        </div>
     </div>
+
+    <!-- Creiamo un componente separato per gestire le quantita del prodotto -->
+     <app-selettore-quantita [quantita]="prodotto().quantita" (quantitaAggiornata)="store.setQuantitaProdotto({idProdotto: prodotto().prodotto.id, quantita: $event})"/>
+
+     <!-- Creiamo la sezione dove ci sarà il prezzo totale aggiornato in base alla quantità selezionata,
+      il bottone della lista desideri e il bottone cestino per togliere il prodotto dal carrello -->
+      <div class="flex flex-col items-end">
+        <div class="text-right font-semibold text-lg"> {{totalePrezzoProdotto()}} </div>
+        <div class="flex -me-3">
+             <button matIconButton>
+                <mat-icon>favorite_border</mat-icon>
+            </button> 
+             <button matIconButton class="danger">
+                <mat-icon>delete</mat-icon>
+            </button> 
+        </div>
+      
+      </div>
 </div>
