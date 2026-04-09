@@ -5,10 +5,11 @@ import { CardProdotto } from "../../components/card-prodotto/card-prodotto";
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ListaDesideriVuota } from "./lista-desideri-vuota/lista-desideri-vuota";
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-lista-desideri',
-  imports: [BottoneIndietro, CardProdotto, MatIconModule, MatButtonModule, ListaDesideriVuota],
+  imports: [BottoneIndietro, CardProdotto, MatIconModule, MatButtonModule, ListaDesideriVuota, NgClass],
   templateUrl: './lista-desideri.html',
   styleUrl: './lista-desideri.css',
 })

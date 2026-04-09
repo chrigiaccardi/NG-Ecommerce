@@ -1,0 +1,11 @@
+<!-- In questo div utilizziamo una direttiva (per attribuire una classe specifica riutilizzabile anche per altri componenti) -->
+<div appPannelloCarrello>
+    <h2 class="text-2xl font-bold mb-4">{{store.conteggioCarrello()}} {{store.conteggioCarrello() === 1 ? 'prodotto' : 'prodotti'}} nel Carrello</h2>
+    <div class="flex flex-col gap-6">
+        @for(prodotto of store.prodottiCarrello(); track prodotto.id) {
+            
+        }
+    </div>
+
+
+</div>

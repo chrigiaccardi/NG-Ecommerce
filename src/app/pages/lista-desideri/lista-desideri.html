@@ -1,7 +1,9 @@
 <!-- iniziamo a creare la pagina della lista dei desideri -->
 <div class="mx-auto max-w-[1200px] py-6 px-4">
     <!-- Il testo lo inseriamo all'interno per l'ng-content che abbiamo dentro il componente invece andare verso dinamicamente inserisco il persorso da navigare al click -->
-    <app-bottone-indietro class="mb-6" andareVerso="/prodotti/tutti"> Continua lo Shopping </app-bottone-indietro>
+    <app-bottone-indietro class="mb-6" andareVerso="/prodotti/tutti" [ngClass]="store.conteggioListaDesideri() > 0 ? '-ms-2 flex items-center gap-1' : '!hidden' ">
+         Continua lo Shopping 
+        </app-bottone-indietro>
 
     <!-- Creiamo un condizionale if: se ci sono prodotti nella lista desideri li visualizza altrimenti visualizza altro se vuoto -->
      @if (store.conteggioListaDesideri() > 0) {

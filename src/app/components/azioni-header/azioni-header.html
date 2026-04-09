@@ -9,7 +9,7 @@
     </button>
 
     <!-- Il bottone con matBadge crea il numerino in base alla lunghezza dell'array del carrello -->
-    <button matIconButton [matBadge]="store.conteggioCarrello()" [matBadgeHidden]="store.conteggioCarrello() === 0" routerLink="/carrello">
+    <button matIconButton routerLink="/carrello" [matBadge]="store.conteggioCarrello()" [matBadgeHidden]="store.conteggioCarrello() === 0" >
         <mat-icon>shopping_cart</mat-icon>
     </button>
 

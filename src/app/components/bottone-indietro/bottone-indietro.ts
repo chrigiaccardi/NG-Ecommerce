@@ -3,12 +3,11 @@ import {MatButtonModule} from '@angular/material/button';
 import { RouterLink } from "@angular/router";
 import {MatIconModule} from '@angular/material/icon';
 import { EcommerceStore } from '../../ecommerce-store';
-import { NgClass } from '@angular/common';
 
 
 @Component({
   selector: 'app-bottone-indietro',
-  imports: [MatButtonModule, RouterLink, MatIconModule, NgClass],
+  imports: [MatButtonModule, RouterLink, MatIconModule],
   templateUrl: './bottone-indietro.html',
   styleUrl: './bottone-indietro.css',
 })
