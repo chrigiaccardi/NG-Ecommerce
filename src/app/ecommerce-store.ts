@@ -305,21 +305,27 @@ export const EcommerceStore = signalStore(
         listaDesideriItems: [],
         prodottiCarrello: []
     }as EcommerceState),
-    withComputed((store) => ({
-        // prodotti filtrati: computed (crea un signal derivato, si ricalcola automaticamente ed è readonly)
-        //  legge i due signal prodotti e categoria, filtra prodotti e ritorna i p che hanno la category = alla categoria
-      // mostrata tutta in lowerCase
-      prodottiFiltrati: computed(() => {
+  withComputed((store) => ({
+    // prodotti filtrati: computed (crea un signal derivato, si ricalcola automaticamente ed è readonly)
+    //  legge i due signal prodotti e categoria, filtra prodotti e ritorna i p che hanno la category = alla categoria
+    // mostrata tutta in lowerCase
+    prodottiFiltrati: computed(() => {
           
-          // se categoria è uguale a tutti ritorna tutti i prodotti, se no ritorna i prodotti filtrati in base alla categoria
-          if (store.categoria() === 'tutti') return store.prodotti();
-          return store.prodotti().filter(p => p.category === store.categoria().toLowerCase());
-        }), 
+      // se categoria è uguale a tutti ritorna tutti i prodotti, se no ritorna i prodotti filtrati in base alla categoria
+      if (store.categoria() === 'tutti') return store.prodotti();
+      return store.prodotti().filter(p => p.category === store.categoria().toLowerCase());
+    }),
       
-        // conteggio lista desideri aggiorna il signal con computer con io numero degli items presenti all'interno ella lista desideri
-        conteggioListaDesideri: computed(() => store.listaDesideriItems().length)
-      
-    })),
+    // conteggio lista desideri aggiorna il signal con computer con io numero degli items presenti all'interno della lista desideri
+    conteggioListaDesideri: computed(() => store.listaDesideriItems().length),
+        
+    // conteggio carrello che aggiorna il signal con computed con il numero di prodotti presenti all'interno del carrello.
+    // reduce trasforma l'array in un singolo valore: acc è l'accomulatore e item l'elemento corrente, entrambi in ingresso.
+    // 0 è il valore iniziale e ogni volta somma la quantità dell'item all'accomulatore partendo da 0.
+    // il matBadge così si aggiorna non in base ai prodotti nell'array ma alla quantità totale dell'array.
+    conteggioCarrello: computed(() => store.prodottiCarrello().reduce((acc, item) => acc + item.quantita, 0)),
+  })),
+  
     // con withMethod creiamo dei metodi per aggiornare gli stati, in questo caso set categoria accoglie in input una categoria string
     // e la va a settare nello store aggiornando solamente lo stato categoria.
     // signalMethod restituisce un signal al posto di void, utile per operazioni asincrone con reattività.
@@ -359,6 +365,10 @@ export const EcommerceStore = signalStore(
         
         // utilizziamo immer per una copia immutabile e una modifica sicura
         const aggiornamentoItemCarrello = produce(store.prodottiCarrello(), (draft) => {
+
+          // verifichiamo l'esistenza con diverso da -1 perchè findIndex sopra restituisce la posizione nell'array.
+          // se trova l'id confrontato restituisce 0,1,2 in base alla posizione, se non trovato restituisce di default -1.
+          // Quindi se è diverso da -1 aggiorna la quantità se invece uguale pusha il prodotto dentro l'array.
           if (esistenzaProdotto !== -1) {
             draft[esistenzaProdotto].quantita += quantita;
             return;
@@ -367,8 +377,12 @@ export const EcommerceStore = signalStore(
             prodotto, quantita
           })
         });
+        
+        // aggiornamento di prodottiCarrello con il metodo aggiornamento.
+        patchState(store, { prodottiCarrello: aggiornamentoItemCarrello });
 
-        patchState(store, {prodottiCarrello: aggiornamentoItemCarrello})
+        // Sia qua che sopra utilizziamo il -1 perchè l'array parte da 0 e quindi -1 vuol dire che non esiste il prodotto nell'array
+        toaster.success(esistenzaProdotto !== -1 ? 'Prodotto Nuovamente Aggiunto' : 'Prodotto aggiunto al Carrello')
         }
 
     }))

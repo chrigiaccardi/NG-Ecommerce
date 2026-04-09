@@ -7,7 +7,9 @@
     <button matIconButton routerLink="/lista-desideri" [matBadge]="store.conteggioListaDesideri()" [matBadgeHidden]="store.conteggioListaDesideri() === 0">
         <mat-icon>favorite</mat-icon>
     </button>
-    <button matIconButton>
+
+    <!-- Il bottone con matBadge crea il numerino in base alla lunghezza dell'array del carrello -->
+    <button matIconButton [matBadge]="store.conteggioCarrello()" [matBadgeHidden]="store.conteggioCarrello() === 0" routerLink="/carrello">
         <mat-icon>shopping_cart</mat-icon>
     </button>
 

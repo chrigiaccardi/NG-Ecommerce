@@ -25,8 +25,8 @@
         <div class="flex items-center justify-between mt-auto">
             <span class="text-2xl font-bold text-gray-900"> {{prodotto().price | currency:'EUR':'symbol'}}</span>
 
-            <!-- Nel bottone impostiamo l'emissione dell'evento al click per aggiungere il prodotto cliccato al carrello -->
-            <button matButton="filled" class="flex items-center gap-2" [disabled]="!prodotto().inStock" (click)="clickAcquista.emit(prodotto())">
+            <!-- Nel bottone impostiamo che è disabilitato se inStock è falso e al click utilizziamo il metodo creato nello store-->
+            <button matButton="filled" class="flex items-center gap-2" [disabled]="!prodotto().inStock" (click)="store.aggiungiAlCarrello(prodotto())">
                 <mat-icon>shopping_cart</mat-icon>
                 Acquista
             </button>

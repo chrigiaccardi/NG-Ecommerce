@@ -4,6 +4,7 @@ import { CurrencyPipe } from '@angular/common';
 import { MatAnchor, MatIconButton } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
 import { BottoneToggle } from "../bottone-toggle/bottone-toggle";
+import { EcommerceStore } from '../../ecommerce-store';
 
 @Component({
   selector: 'app-card-prodotto',
@@ -16,7 +17,8 @@ export class CardProdotto {
   // che i dati siano obbligatori in ingresso
   prodotto = input.required<Prodotto>()
 
-  // questo metodo output prende il click e il prodotto e lo emette al parent per far si che venga aggiunto al'array del carrello 
-  clickAcquista = output<Prodotto>()
+  // iniettiamo Ecommerce-Store per poter utilizzare il metodo aggiungi al carrello al click del bottone
+  store = inject(EcommerceStore)
+
 
 }

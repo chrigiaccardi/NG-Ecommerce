@@ -8,5 +8,6 @@ export const routes: Routes = [
 
     { path: 'prodotti/:categoria', loadComponent: () => import('./pages/griglia-prodotti/griglia-prodotti')},
     { path: 'lista-desideri', loadComponent: () => import('./pages/lista-desideri/lista-desideri')},
+    { path: 'carrello', loadComponent: () => import('./pages/carrello/carrello')},
 
 ];
