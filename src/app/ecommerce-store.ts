@@ -412,7 +412,7 @@ export const EcommerceStore = signalStore(
         // patchState aggiorna i prodotti nel carrello e azzera l'array della lista desideri
         patchState(store, {prodottiCarrello: aggiornamentoItemCarrello, listaDesideriItems: []})
       },
-      // aggiunge un prodotto alla lista desideri e lo rimuove dal carrello
+      // aggiunge un prodotto alla lista desideri e aggiorna il carrello
       daCarrelloAListaDesideri: (prodotto: Prodotto) => {
         // aggiorniamo il carrello rimuovendo il prodotto
         const aggiornamentoItemCarrello = store.prodottiCarrello().filter((p => p.prodotto.id !== prodotto.id));
@@ -424,7 +424,10 @@ export const EcommerceStore = signalStore(
         });
         patchState(store, {prodottiCarrello: aggiornamentoItemCarrello, listaDesideriItems: aggiornamentoItemListDesideri})
       },
-      
+      // rimuove il prodotto dal carrello
+      rimuoviDalCarrello: (prodotto: Prodotto) => {
+        patchState(store, {prodottiCarrello: store.prodottiCarrello().filter(c => c.prodotto.id !== prodotto.id)})
+      }
 
     }))
 )

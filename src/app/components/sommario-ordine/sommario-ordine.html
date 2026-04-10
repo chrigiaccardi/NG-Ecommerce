@@ -1,0 +1,18 @@
+<!-- Creiamo un componente riutilizzabile di sommario dell'ordine -->
+<div appPannelloCarrello class="">
+    <h2 class="text-xl font-bold mb-4">Sommario Ordine</h2>
+    <div class="space-y-3 text-lg pt-4 border-t">
+        <div class="flex justify-between">
+            <span>SubTotale:</span>
+            <span>{{subtotale() | currency:'EUR': 'symbol'}}</span>
+        </div>
+        <div class="flex justify-between">
+            <span>IVA:</span>
+            <span>{{iva() | currency:'EUR': 'symbol'}}</span>
+        </div>
+        <div class="flex justify-between border-t pt-3 font-bold text-lg">
+            <span>Totale Ordine:</span>
+            <span>{{totaleOrdine() | currency:'EUR': 'symbol'}}</span>
+        </div>
+    </div>
+</div>
