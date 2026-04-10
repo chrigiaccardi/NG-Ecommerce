@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { BottoneIndietro } from "../../components/bottone-indietro/bottone-indietro";
 import { ListaProdottiCarrello } from "./lista-prodotti-carrello/lista-prodotti-carrello";
+import { PannelloListaDesideriCarrello } from "../pannello-prodotti-carrello/pannello-lista-desideri-carrello/pannello-lista-desideri-carrello";
 
 @Component({
   selector: 'app-carrello',
-  imports: [BottoneIndietro, ListaProdottiCarrello],
+  imports: [BottoneIndietro, ListaProdottiCarrello, PannelloListaDesideriCarrello],
   templateUrl: './carrello.html',
   styleUrl: './carrello.css',
 })

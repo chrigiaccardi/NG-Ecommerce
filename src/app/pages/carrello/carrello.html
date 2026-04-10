@@ -5,10 +5,12 @@
     <app-bottone-indietro class="mb-6" andareVerso="/prodotti/tutti">Continua Lo Shopping</app-bottone-indietro>
     <h1 class="text-3xl font-extrabold mb-4 px-4">Carrello</h1>
 
-    <!--  -->
+    <!-- Creiamo un pannello aggiuntivo per la visualizzazione della lista desideri e nel caso aggiungerli al carrello -->
+     <app-pannello-lista-desideri-carrello class="mb-6 block"/>
+
+    <!-- Creiamo un nuovo componente per la lista dei prodotti da comprare -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div class="lg:col-span-2">
-            <!-- Creiamo un nuovo componente per la sezione della lista desideri da poter inserire nel carrello -->
              <app-lista-prodotti-carrello />
         </div>
     </div>

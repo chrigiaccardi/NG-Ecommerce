@@ -25,7 +25,7 @@ export class BottoneToggle {
     if (this.presenteNellaListaDesideri()) {
       this.store.rimuoviDallaListaDesideri(prodotto);
     } else {
-      this.store.aggiungiDallaListaDesideri(prodotto);
+      this.store.aggiungiAllaListaDesideri(prodotto);
     }
   }
 }

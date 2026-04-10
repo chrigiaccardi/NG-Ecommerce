@@ -337,7 +337,8 @@ export const EcommerceStore = signalStore(
         setCategoria: signalMethod<string>((categoria: string) => {
             patchState(store, {categoria})
         }),
-        aggiungiDallaListaDesideri: (prodotto: Prodotto) => {
+      // Aggiunge un prodotto alla lista desideri
+      aggiungiAllaListaDesideri: (prodotto: Prodotto) => {
             // prendamo lo stato attuale della lista desideri (signal)
             const aggiornamentoItemListDesideri = produce(store.listaDesideriItems(), (draft) => {
               // crea una copia mutabile del signal con immer (installato antecedente npm i immer)
@@ -352,17 +353,20 @@ export const EcommerceStore = signalStore(
             // utilizziamo il toaster per mandare un 'popup' all'utente e confermare l'aggiunta del prodotto alla lista desideri
             toaster.success('Prodotto aggiunto dalla Lista Desideri')
       },
-        rimuoviDallaListaDesideri: (prodotto: Prodotto) => {
+      // Rimuove un prodotto dalla lista dei desideri
+      rimuoviDallaListaDesideri: (prodotto: Prodotto) => {
           patchState(store, {
             // aggiorna gli item filtrando tutti quelli che sono diversi e di conseguenza togliendo quello con id uguale
             listaDesideriItems: store.listaDesideriItems().filter((p) => p.id !== prodotto.id)
           });
           toaster.success('Prodotto rimosso dalla Lista Desideri');
       },
-        pulisciListaDesideri: () => {
-          // aggiorna la lista desideri ad un array vuoto quindi cancella tutti i prodotti
-        patchState(store, { listaDesideriItems: [] })
+       // ripulisce la lista dei desideri 
+      pulisciListaDesideri: () => {
+        // aggiorna la lista desideri ad un array vuoto quindi cancella tutti i prodotti
+      patchState(store, { listaDesideriItems: [] })
       },
+      // aggiunge al carrello un prodotto
       aggiungiAlCarrello: (prodotto: Prodotto, quantita = 1) => {
           // istanziamo l'esistenza del prodotto per controllare subito se il prodotto esiste oppure no
         const esistenzaProdotto = store.prodottiCarrello().findIndex(i => i.prodotto.id === prodotto.id);
@@ -388,13 +392,39 @@ export const EcommerceStore = signalStore(
         // Sia qua che sopra utilizziamo il -1 perchè l'array parte da 0 e quindi -1 vuol dire che non esiste il prodotto nell'array
         toaster.success(esistenzaProdotto !== -1 ? 'Prodotto Nuovamente Aggiunto' : 'Prodotto aggiunto al Carrello')
       },
+      // setta la quandita dei prodotti nel carrello
       setQuantitaProdotto: (params:{idProdotto: string, quantita: number } ) => {
-        const index = store.prodottiCarrello().findIndex(c => c.prodotto.id = params.idProdotto)
+        const index = store.prodottiCarrello().findIndex(c => c.prodotto.id === params.idProdotto)
         const aggiornamento = produce(store.prodottiCarrello(), (draft) => {
           draft[index].quantita = params.quantita
         });
         patchState(store, {prodottiCarrello: aggiornamento})
-      }
+      },
+      // aggiunge tutta la lista desideri al carrello
+      aggiungiListaDesideriAlCarrello: () => {
+        const aggiornamentoItemCarrello = produce(store.prodottiCarrello(), (draft) => {
+          store.listaDesideriItems().forEach(p => {
+            if (!draft.find(c => c.prodotto.id === p.id)) {
+              draft.push({ prodotto: p, quantita: 1 })
+            }
+          })
+        });
+        // patchState aggiorna i prodotti nel carrello e azzera l'array della lista desideri
+        patchState(store, {prodottiCarrello: aggiornamentoItemCarrello, listaDesideriItems: []})
+      },
+      // aggiunge un prodotto alla lista desideri e lo rimuove dal carrello
+      daCarrelloAListaDesideri: (prodotto: Prodotto) => {
+        // aggiorniamo il carrello rimuovendo il prodotto
+        const aggiornamentoItemCarrello = store.prodottiCarrello().filter((p => p.prodotto.id !== prodotto.id));
+
+        const aggiornamentoItemListDesideri = produce(store.listaDesideriItems(), (draft) => {
+          if (!draft.find(p => p.id === prodotto.id)) {
+            draft.push(prodotto)
+          }
+        });
+        patchState(store, {prodottiCarrello: aggiornamentoItemCarrello, listaDesideriItems: aggiornamentoItemListDesideri})
+      },
+      
 
     }))
 )

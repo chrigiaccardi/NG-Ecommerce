@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <!-- Creiamo un componente separato per gestire le quantita del prodotto -->
+    <!-- Creiamo un componente separato per gestire le quantita del prodotto e con il property binding utilizziamo il metodo per aggiornare le quantita-->
      <app-selettore-quantita [quantita]="prodotto().quantita" (quantitaAggiornata)="store.setQuantitaProdotto({idProdotto: prodotto().prodotto.id, quantita: $event})"/>
 
      <!-- Creiamo la sezione dove ci sarà il prezzo totale aggiornato in base alla quantità selezionata,

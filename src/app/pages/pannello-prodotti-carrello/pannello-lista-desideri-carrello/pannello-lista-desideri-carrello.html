@@ -1,0 +1,18 @@
+<!-- Creiamo il pannello per la visualizzazione della lista desideri.
+ Utilizziamo la direttiva pannello-carrello così da avere già pronte le stesse specifiche -->
+ <div appPannelloCarrello class="flex items-center justify-between">
+    <div class="flex items-center gap-3">
+        <mat-icon class="!text-red-500">favorite_border</mat-icon>
+    </div>
+    <div>
+        <h2 class="text-xl font-bold">Lista Desideri ({{store.conteggioListaDesideri()}})</h2>
+        <p class="text-gray-500 text-sm">Hai {{store.conteggioListaDesideri()}} {{store.conteggioListaDesideri() === 1 ? 'prodotto' : 'prodotti'}} salvati nella Lista</p>
+    </div>
+    <div class="flex items-center gap-3">
+        <button matButton routerLink="/lista-desideri">Visualizza Tutti</button>
+        <button matButton="filled" class="flex items-center gap-2" (click)="store.aggiungiListaDesideriAlCarrello()">
+            <mat-icon>shopping_cart</mat-icon>
+             Aggiungi tutti al carrello
+        </button>
+    </div>
+ </div>
