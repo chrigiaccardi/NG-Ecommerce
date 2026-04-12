@@ -15,4 +15,8 @@
             <span>{{totaleOrdine() | currency:'EUR': 'symbol'}}</span>
         </div>
     </div>
+
+    <!-- ng-content inserisce il contenuto del parent nel child, il select invece dichiara che vengono solamente presi
+     e selezionati gli elementi che hanno come attributo bottoniAzione. Possono essere o elementi o container-->
+    <ng-content select="[bottoniAzione]" />
 </div>

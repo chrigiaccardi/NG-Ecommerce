@@ -14,8 +14,16 @@
              <app-lista-prodotti-carrello />
         </div>
         <!-- Creiamo il pannello, con un nuovo componente, per la somma totale del carrello -->
-        <div class="">
-            <app-sommario-ordine />
+        <div>
+            <app-sommario-ordine>
+                <!-- Utilizziamo un ng-container che è un container vuoto e non verrà renderizzato nel dom finale.
+                 ng-container ha l'attributo bottoniAzione e quindi verrà preso e inserito nel ng-content child -->
+                 <ng-container bottoniAzione>
+
+                    <!-- Al click del bottone attiviamo il metodo -->
+                    <button matButton="filled" class="w-full mt-6 py-3" (click)="store.checkoutDialog()"> Procedi al Checkout </button>
+                 </ng-container>
+            </app-sommario-ordine>
         </div>
 
 </div>

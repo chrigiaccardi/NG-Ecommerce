@@ -1,0 +1,45 @@
+<!-- creiamo un material dialog per effettuare il login per procedere al checkout. 
+ Un dialog è una piccola finestra che appare in mezzo allo schermo-->
+ <div class="p-8 max-w-[400px] flex flex-col">
+    <!-- creiamo una sezione separata alta con descrizione e bottone di chiusura X -->
+    <div class="flex justify-between">
+        <div>
+            <h2 class="text-xl font-medium mb-1">Sign In</h2>
+            <p class="text-sm text-gray-500"> Entra nel tuo Account per poter continuare! </p>
+        </div>
+        <!-- In questo bottone tabindex -1 rimuove la tabulazione keybord, le X di chiusura non sono navigabili con il TAB ->|.
+         mat-dialog-close con ng-material invece imposta la chiusura automatica del dialog al click sulla X (no codice extra)  -->
+        <button tabindex="-1" matIconButton class="-mt-2 -mr-2" mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <!-- Creiamo il form per inserire mail e password per fare l'accesso. con FormGroup colleghiamo il form
+     in questione con il form nel file TS per le specifiche. ngSubmit avvia il metodo specifico al click del bottone
+     di tipo submit -->
+    <form class="mt-4" [formGroup]="signInForm" (ngSubmit)="signIn()">
+        <mat-form-field class="w-full mb-4">
+            <input type="email" matInput formControlName="email" placeholder="Inserisci la tua Email">
+            <!-- matPrefix inserisce testo o icona a sx dell'input dentro il form -->
+            <mat-icon matPrefix>email</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="mb-6">
+            <!-- Utilizziamo il signal passwordVisibile per avere il bottoncino per far vedere la password oppure renderla oscurata.
+             con [type] rendiamo il tipo di dato dinamico al signal: se vero cambia e diventa testo, di conceguenza si vedono le lettere,
+            se falso imposta password e rimane oscurato.-->
+            <input matInput formControlName="password" [type]="passwordVisibile() ? 'text' : 'password'" placeholder="Inserisci la Password">
+            <mat-icon matPrefix>lock</mat-icon>
+
+            <!-- matSuffix sta a destra dell'imput dove al click imposta il signal passwordVisibile al contrario di quello che è in quel momento. -->
+            <button matSuffix matIconButton type="button" class="mr-2" (click)="passwordVisibile.set(!passwordVisibile())">
+                
+                <!-- [fontIcon] rende dinamico il testo dentro l'icona così che cambi al signal, se vero verrà visualizzata l'icona per
+                 disattivare la visibilità della password, al contrario se falso l'icona sarà visibilità. 
+                 In inglese per angular material. -->
+                <mat-icon [fontIcon]="passwordVisibile() ? 'visibility_off' : 'visibility'"></mat-icon>
+            </button>
+        </mat-form-field>
+
+        <!-- Inseriamo il bottone submit per l'invio e la conferma -->
+         <button type="submit" matButton="filled" class="w-full">Accedi</button>
+    </form> 
+ </div>
