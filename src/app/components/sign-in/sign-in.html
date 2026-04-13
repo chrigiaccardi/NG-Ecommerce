@@ -17,11 +17,13 @@
      in questione con il form nel file TS per le specifiche. ngSubmit avvia il metodo specifico al click del bottone
      di tipo submit -->
     <form class="mt-4" [formGroup]="signInForm" (ngSubmit)="signIn()">
+
         <mat-form-field class="w-full mb-4">
             <input type="email" matInput formControlName="email" placeholder="Inserisci la tua Email">
             <!-- matPrefix inserisce testo o icona a sx dell'input dentro il form -->
             <mat-icon matPrefix>email</mat-icon>
         </mat-form-field>
+        
         <mat-form-field class="mb-6">
             <!-- Utilizziamo il signal passwordVisibile per avere il bottoncino per far vedere la password oppure renderla oscurata.
              con [type] rendiamo il tipo di dato dinamico al signal: se vero cambia e diventa testo, di conceguenza si vedono le lettere,

@@ -6,7 +6,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { EcommerceStore } from '../../ecommerce-store';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDivider } from "@angular/material/divider";
-import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog"
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog"
 import { SignIn } from '../sign-in/sign-in';
 import { SignUp } from '../sign-up/sign-up';
 

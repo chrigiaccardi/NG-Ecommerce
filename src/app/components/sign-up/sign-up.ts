@@ -5,11 +5,11 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef} from "@angul
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule, MatPrefix, MatSuffix } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { SignInParams, SignUpParams } from '../../models/user';
+import { SignUpParams } from '../../models/user';
 import { EcommerceStore } from '../../ecommerce-store';
-import { MatBadge } from "@angular/material/badge";
 import { SignIn } from '../sign-in/sign-in';
-import Checkout from '../../pages/checkout/checkout';
+
+
 
 @Component({
   selector: 'app-sign-up',
