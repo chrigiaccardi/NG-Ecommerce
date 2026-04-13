@@ -10,7 +10,7 @@ export interface SignUpParams {
     email: string;
     password: string;
     checkout?: boolean;
-    dialogId?: string;
+    dialogId: string;
 }
 
 // in questo caso il tipo SignInParams è uguale a SignUpParams ma omette il dato 'name'

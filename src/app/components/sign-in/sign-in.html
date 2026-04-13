@@ -42,4 +42,10 @@
         <!-- Inseriamo il bottone submit per l'invio e la conferma -->
          <button type="submit" matButton="filled" class="w-full">Accedi</button>
     </form> 
- </div>
+
+    <!-- Inseriamo una sezione per iscriversi nel caso l'utente non avesse un account -->
+    <p class="text-sm text-gray-500 mt-2 text-center">
+        Non hai un account?
+        <a class="text-blue-600 cursor-pointer" (click)="apriSignUpDialog()">Iscriviti Qui</a>
+    </p>
+</div>

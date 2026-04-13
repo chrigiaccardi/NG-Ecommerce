@@ -1,1 +1,49 @@
-<p>sign-up works!</p>
+<!-- Creiamo il dialog simile al signIn-->
+ <div class="p-8 min-w-[400px] flex flex-col">
+    <div class="flex justify-between">
+        <div>
+            <h2 class="text-xl font-medium mb-1">Registrati</h2>
+            <p class="text-sm text-gray-500">Unisciti a noi e inizia lo shopping!</p>
+        </div>
+        <button tabindex="-1" matIconButton class="-mt-2 -mr-2" matDialogClose="">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <form [formGroup]="signUpForm" class="mt-6 flex flex-col" (submit)="signUp()">
+
+        <mat-form-field class="mb-4">
+            <input formControlName="name" type="text" matInput placeholder="Inserisci il tuo nome">
+            <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="mb-4">
+            <input formControlName="email" type="email" matInput placeholder="Inserisci la tua Email">
+            <mat-icon matPrefix>email</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="mb-4">
+            <input formControlName="password" [type]="passwordVisibile() ? 'text' : 'password'" matInput placeholder="Inserisci la password">
+            <mat-icon matPrefix>lock</mat-icon>
+            <button matSuffix matIconButton type="button" class="mr-2" (click)="passwordVisibile.set(!passwordVisibile())">
+                <mat-icon [fontIcon]="passwordVisibile() ? 'visibility_off' : 'visibility'"></mat-icon>
+            </button>
+        </mat-form-field>
+
+        <mat-form-field class="mb-4">
+            <input formControlName="confermaPassword" [type]="passwordVisibileCP() ? 'text' : 'password'" matInput placeholder="Inserisci il tuo nome">
+            <mat-icon matPrefix>lock</mat-icon>
+            <button matSuffix matIconButton type="button" class="mr-2" (click)="passwordVisibile.set(!passwordVisibile())">
+                <mat-icon [fontIcon]="passwordVisibileCP() ? 'visibility_off' : 'visibility'"></mat-icon>
+            </button>
+        </mat-form-field>
+        
+        <button type="submit" matButton="filled" class="w-full" >
+            <!-- {{store.loading() ? 'In Corso ...' : 'Crea Account'}} -->
+             Crea Account
+        </button>
+    </form>
+    <p class="text-sm text-gray-500 mt-2 text-center">
+        Hai già un Account?
+        <a class="text-blue-600 cursor-pointer" (click)="apriSignInDialog()"> Sign In</a>
+    </p>
+ </div>

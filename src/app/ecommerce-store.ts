@@ -12,7 +12,8 @@ import { Toaster } from "./services/toaster";
 import { ProdottiCarrello } from "./models/prodotti-carrello";
 import { MatDialog } from "@angular/material/dialog";
 import { SignIn } from "./components/sign-in/sign-in";
-import { SignInParams, User } from "./models/user";
+import { SignInParams, SignUpParams, User } from "./models/user";
+import { Router } from "@angular/router";
 
 export type EcommerceState = {
   prodotti: Prodotto[];
@@ -337,7 +338,7 @@ export const EcommerceStore = signalStore(
   // con withMethod creiamo dei metodi per aggiornare gli stati, in questo caso set categoria accoglie in input una categoria string
   // e la va a settare nello store aggiornando solamente lo stato categoria.
   // signalMethod restituisce un signal al posto di void, utile per operazioni asincrone con reattività.
-  withMethods((store, toaster = inject(Toaster), dialog = inject(MatDialog)) => ({
+  withMethods((store, toaster = inject(Toaster), matDialog = inject(MatDialog), router = inject(Router)) => ({
     setCategoria: signalMethod<string>((categoria: string) => {
       patchState(store, { categoria })
     }),
@@ -436,23 +437,58 @@ export const EcommerceStore = signalStore(
     // di chiudersi se clicchiamo nel background.
     // data.checkout true conferma al MAT_DIALOG_DATA che il dialog è stato aperto nella pagina checkout.
     checkoutDialog: () => {
-      dialog.open(SignIn, {
+      matDialog.open(SignIn, {
         disableClose: true,
         data: {
           checkout: true
         }
       })
     },
-    // con signIn autentichiamo email e password per l'accesso al profilo, in ingresso abbiamo i parametri email e password
-    signIn: ({email, password}: SignInParams) => {
+    // con signIn autentichiamo email e password per l'accesso al profilo, in ingresso abbiamo i parametri email, password, checkout e dialogId
+    signIn: ({email, password, checkout, dialogId}: SignInParams) => {
       patchState(store, {
         user: {
           id: '1',
           email,
           name: 'Christian Giaccardi',
           imageUrl: 'https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-user-profile-avatar-png-image_10211467.png'
-        } })
+        }
+      });
+      // impostiamo che il dialog specifico tramite id si chiuda all'autenticazione
+      matDialog.getDialogById(dialogId)?.close();
+
+      // se il checkout è vero vuol dire che abbiamo aperto il dialog dal bottone per il pagamento,
+      // di conseguenza impostiamo la route verso il checkout. se invece false la route la impostiamo
+      // verso la griglia prodotti
+      if (checkout) {
+        router.navigate(['/checkout']);
+      }
     },
+    // signUp è molto simile a signIn
+    signUp: ({email, password, name, checkout, dialogId}: SignUpParams) => {
+      patchState(store, {
+        user: {
+          id: '1',
+          email,
+          name: 'Christian Giaccardi',
+          imageUrl: 'https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-user-profile-avatar-png-image_10211467.png'
+        }
+      });
+      // impostiamo che il dialog specifico tramite id si chiuda all'autenticazione
+      matDialog.getDialogById(dialogId)?.close();
+
+      // se il checkout è vero vuol dire che abbiamo aperto il dialog dal bottone per il pagamento,
+      // di conseguenza impostiamo la route verso il checkout. se invece false la route la impostiamo
+      // verso la griglia prodotti
+      if (checkout) {
+        router.navigate(['/checkout']);
+      }
+    },
+
+    // signOut scollega il profilo
+    signOut: () => {
+      patchState(store, {user: undefined})
+    }
   })
   )
 )

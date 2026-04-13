@@ -1,12 +1,16 @@
-import { Component, Inject, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from "@angular/material/dialog"
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog"
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule, MatPrefix, MatSuffix } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SignInParams } from '../../models/user';
 import { EcommerceStore } from '../../ecommerce-store';
+import { SignUp } from '../sign-up/sign-up';
+
+
+
 
 @Component({
   selector: 'app-sign-in',
@@ -30,6 +34,9 @@ export class SignIn {
   // iniettiamo MatDialogRef che gestisce e controlla il Dialog
   dialogRef = inject(MatDialogRef)
 
+  // iniettiamo MatDialog per manipolare il Dialog
+  matDialog = inject(MatDialog)
+
   // dichiariamo che il form signIN è un formBuilder con determinati campi. Mail e PW sono messi così di default per test.
   // Validators controlla che il campo sia valido e required obbligatorio.
   signInForm = this.formBuilder.group({
@@ -50,5 +57,17 @@ export class SignIn {
     // e dialogId che con il ref restituisce l'id del Dialog aperto nel momento.
     const { email, password } = this.signInForm.value;
     this.store.signIn({email, password, checkout: this.data.checkout, dialogId: this.dialogRef.id } as SignInParams)
+  };
+
+  // metodo apriSignUpDialog per aprire il dialog per effettuare la registrazione al sito
+  // dialogRef che sarebbe quello per il signIn si chiude e si apre quello per il sign UP
+  apriSignUpDialog() {
+    this.dialogRef.close()
+    this.matDialog.open(SignUp, {
+      disableClose: true,
+      data: {
+        checkout: this.data.checkout
+      }
+    })
   }
 }
