@@ -5,10 +5,11 @@ import { FormPagamento } from "./form-pagamento/form-pagamento";
 import { SommarioOrdine } from "../../components/sommario-ordine/sommario-ordine";
 import { EcommerceStore } from '../../ecommerce-store';
 import { CurrencyPipe } from '@angular/common';
+import { MatAnchor } from "@angular/material/button";
 
 @Component({
   selector: 'app-checkout',
-  imports: [BottoneIndietro, FormSpedizione, FormPagamento, SommarioOrdine, CurrencyPipe],
+  imports: [BottoneIndietro, FormSpedizione, FormPagamento, SommarioOrdine, CurrencyPipe, MatAnchor],
   templateUrl: './checkout.html',
   styleUrl: './checkout.css',
 })

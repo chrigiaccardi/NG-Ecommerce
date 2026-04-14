@@ -14,6 +14,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { SignIn } from "./components/sign-in/sign-in";
 import { SignInParams, SignUpParams, User } from "./models/user";
 import { Router } from "@angular/router";
+import { Ordine } from "./models/ordine";
 
 export type EcommerceState = {
   prodotti: Prodotto[];
@@ -21,6 +22,7 @@ export type EcommerceState = {
   listaDesideriItems: Prodotto[];
   prodottiCarrello: ProdottiCarrello[];
   user: User | undefined;
+  caricamento: boolean
 }
 
 export const EcommerceStore = signalStore(
@@ -310,7 +312,8 @@ export const EcommerceStore = signalStore(
     categoria: 'tutti',
     listaDesideriItems: [],
     prodottiCarrello: [],
-    user: undefined
+    user: undefined,
+    caricamento: false
   } as EcommerceState),
     
   // withComputed setta e definisce gli aggiornamenti finali dei signal
@@ -449,6 +452,31 @@ export const EcommerceStore = signalStore(
       router.navigate(['/checkout'])
    
     },
+    // metodo per concludere ed effettuare l'ordine
+    concludiOrdine: async() => {
+      // impostiamo il caricamento a true
+      patchState(store, { caricamento: true });
+      // controlliamo che l'utente sia loggato prima di continuare
+      const user = store.user();
+      if (!user) {
+        toaster.error("Accedi al tuo Account prima di proseguire con l'ordine");
+        return;
+      }
+      // istanziamo ordine per come deve essere strutturato: crypto.randomUUID genera un Unico Universale ID
+      const ordine: Ordine = {
+        id: crypto.randomUUID(),
+        userId: user.id,
+        totale: store.prodottiCarrello().reduce((acc, prodotto) => acc + (prodotto.quantita * prodotto.prodotto.price), 0),
+        prodottiOrdine: store.prodottiCarrello(),
+        statoPagamento: 'Successo'
+      };
+      // creiamo un effetto latenza così che ci sia il caricamento di tutto
+      await new Promise((risoluzione) => setTimeout(risoluzione, 1000))
+    },
+
+
+
+
     // con signIn autentichiamo email e password per l'accesso al profilo, in ingresso abbiamo i parametri email, password, checkout e dialogId
     signIn: ({email, password, checkout, dialogId}: SignInParams) => {
       patchState(store, {
@@ -489,7 +517,6 @@ export const EcommerceStore = signalStore(
         router.navigate(['/checkout']);
       }
     },
-
     // signOut scollega il profilo
     signOut: () => {
       patchState(store, {user: undefined})

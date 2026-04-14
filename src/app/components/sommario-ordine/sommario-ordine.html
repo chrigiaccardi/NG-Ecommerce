@@ -3,9 +3,12 @@
     <h2 class="text-xl font-bold mb-4">Sommario Ordine</h2>
 
     <div class="space-y-2 border-b pb-4">
+        <!-- ng-content inserisce il contenuto del parent nel child, il select invece dichiara che vengono solamente presi
+        e selezionati gli elementi che hanno come attributo itemsCheckout/bottoniAzione. Possono essere o elementi o container-->
         <ng-content select="[itemsCheckout]" />
     </div>
-
+    
+    <!-- Sommario con diviso subtotale, iva e totale ordine -->
     <div class="space-y-3 text-lg pt-4 border-t">
         <div class="flex justify-between">
             <span>SubTotale:</span>
@@ -21,7 +24,6 @@
         </div>
     </div>
 
-    <!-- ng-content inserisce il contenuto del parent nel child, il select invece dichiara che vengono solamente presi
-     e selezionati gli elementi che hanno come attributo bottoniAzione. Possono essere o elementi o container-->
+    <!-- ng-content per il bottone azione per proceder -->
     <ng-content select="[bottoniAzione]" />
 </div>

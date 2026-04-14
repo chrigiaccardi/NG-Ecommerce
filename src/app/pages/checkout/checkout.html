@@ -6,15 +6,17 @@
 
     <!-- questo div normalmente è a una colonna (mobile first) quando è lg (>1024px) diventa a 5 colonne-->
     <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
-        <!-- questo div contieneil form di spedizione e di pagamento che utilizza in mod lg 3 colonne su 5 -->
+
+        <!-- questo div contiene il form di spedizione e di pagamento che utilizza in mod lg 3 colonne su 5 -->
         <div class="lg:col-span-3 flex flex-col gap-6">
             <app-form-spedizione />
             <app-form-pagamento />
         </div>
+
     <!-- Questo div invece occuperà due colonne per il sommario dell'ordine -->
         <div class="lo:col-span-2">
             <app-sommario-ordine>
-
+                <!-- Ng-container proietta al parent questo blocco codice (itemsCheckout) -->
                 <ng-container itemsCheckout>
                     @for (item of store.prodottiCarrello(); track item.prodotto.id) {
                         <div class="text-sm flex justify-between">
@@ -22,6 +24,14 @@
                             <span>{{item.prodotto.price * item.quantita | currency: 'EUR': 'symbol'}}</span>
                         </div>
                     }
+                </ng-container>
+
+                <!-- ng container proietta questo blocco (bottoniAzione) codice al parent -->
+                <ng-container bottoniAzione>
+                    <button matButton="filled" class="w-full mt-6 py-3" [disabled]="store.caricamento()" (click)="store.concludiOrdine()">
+                        {{store.caricamento() ? 'Caricamento...' : 'Place Order'}}
+                    </button>
+
                 </ng-container>
 
             </app-sommario-ordine>
