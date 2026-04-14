@@ -55,18 +55,21 @@ export class SignIn {
     }
     // vengono presi i valori dall'input email e password e passati al metodo nel store con checkout (per capire se è stato aperto dal bottone del checkout o dal signIn)
     // e dialogId che con il ref restituisce l'id del Dialog aperto nel momento.
+    // su checkout mettiamo il ? così che sia opzionale ricevere il dato
     const { email, password } = this.signInForm.value;
-    this.store.signIn({email, password, checkout: this.data.checkout, dialogId: this.dialogRef.id } as SignInParams)
+    this.store.signIn({email, password, checkout: this.data?.checkout, dialogId: this.dialogRef.id } as SignInParams)
   };
 
   // metodo apriSignUpDialog per aprire il dialog per effettuare la registrazione al sito
   // dialogRef che sarebbe quello per il signIn si chiude e si apre quello per il sign UP
+  // su checkout mettiamo il? così che sia opzionale ricevere il dato
+
   apriSignUpDialog() {
     this.dialogRef.close()
     this.matDialog.open(SignUp, {
       disableClose: true,
       data: {
-        checkout: this.data.checkout
+        checkout: this.data?.checkout
       }
     })
   }

@@ -50,6 +50,8 @@ export class SignUp {
   passwordVisibileCP = signal(false)
 
   // creiamo il metodo per effettuare la registrazione dell'account
+  // su checkout mettiamo il ? così che sia opzionale ricevere il dato
+
   signUp() {
     if (!this.signUpForm.valid) {
       this.signUpForm.markAllAsTouched();
@@ -57,16 +59,18 @@ export class SignUp {
     }
     const { name, email, password } = this.signUpForm.value;
 
-    this.store.signUp({name, email, password , dialogId: this.dialogRef.id, checkout: this.data.checkout} as SignUpParams)
+    this.store.signUp({name, email, password , dialogId: this.dialogRef.id, checkout: this.data?.checkout} as SignUpParams)
   };
 
   // creiamo un metodo per poter aprire il dialog per loggarsi
+  // su checkout mettiamo il ? così che sia opzionale ricevere il dato
+
   apriSignInDialog() {
     this.dialogRef.close();
     this.matDialog.open(SignIn, {
       disableClose: true,
       data: {
-        checkout: this.data.checkout
+        checkout: this.data?.checkout
       }
     });
 

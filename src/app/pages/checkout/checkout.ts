@@ -1,9 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { BottoneIndietro } from "../../components/bottone-indietro/bottone-indietro";
+import { FormSpedizione } from "./form-spedizione/form-spedizione";
+import { FormPagamento } from "./form-pagamento/form-pagamento";
+import { SommarioOrdine } from "../../components/sommario-ordine/sommario-ordine";
+import { EcommerceStore } from '../../ecommerce-store';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-checkout',
-  imports: [],
+  imports: [BottoneIndietro, FormSpedizione, FormPagamento, SommarioOrdine, CurrencyPipe],
   templateUrl: './checkout.html',
   styleUrl: './checkout.css',
 })
-export default class Checkout {}
+export default class Checkout {
+  // Iniettiamo lo store per poterlo utilizzare
+  store = inject(EcommerceStore)
+}

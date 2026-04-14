@@ -437,12 +437,17 @@ export const EcommerceStore = signalStore(
     // di chiudersi se clicchiamo nel background.
     // data.checkout true conferma al MAT_DIALOG_DATA che il dialog è stato aperto nella pagina checkout.
     checkoutDialog: () => {
-      matDialog.open(SignIn, {
-        disableClose: true,
-        data: {
-          checkout: true
-        }
-      })
+      if (!store.user()) {
+        matDialog.open(SignIn, {
+          disableClose: true,
+          data: {
+            checkout: true
+          }
+        }) 
+        return;
+      };
+      router.navigate(['/checkout'])
+   
     },
     // con signIn autentichiamo email e password per l'accesso al profilo, in ingresso abbiamo i parametri email, password, checkout e dialogId
     signIn: ({email, password, checkout, dialogId}: SignInParams) => {

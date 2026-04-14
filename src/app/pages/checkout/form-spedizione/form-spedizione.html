@@ -1,0 +1,27 @@
+<!-- Utilizziamo la direttiva Pannello Carrello per rendere il div uguale agli altri utilizzati nel checkout  -->
+<div appPannelloCarrello>
+    <h2 class="text-2xl font-bold mb-6 flex items-enter gap-2">
+        <mat-icon>local_shipping</mat-icon>
+        Dettagli Spedizione
+    </h2>
+    <form class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <mat-form-field>
+            <input type="text" matInput placeholder="Nome">
+        </mat-form-field>
+        <mat-form-field>
+            <input type="text" matInput placeholder="Cognome">
+        </mat-form-field>
+        <mat-form-field class="col-span-2">
+            <input type="text" matInput placeholder="Indirizzo">
+        </mat-form-field>
+        <mat-form-field>
+            <input type="text" matInput placeholder="Città">
+        </mat-form-field>
+        <mat-form-field>
+            <input type="text" matInput placeholder="Stato">
+        </mat-form-field>
+        <mat-form-field class="col-span-2">
+            <input type="text" matInput placeholder="Codice Postale">
+        </mat-form-field>
+    </form>
+</div>

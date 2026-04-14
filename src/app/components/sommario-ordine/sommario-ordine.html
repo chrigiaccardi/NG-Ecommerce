@@ -1,6 +1,11 @@
 <!-- Creiamo un componente riutilizzabile di sommario dell'ordine -->
 <div appPannelloCarrello class="">
     <h2 class="text-xl font-bold mb-4">Sommario Ordine</h2>
+
+    <div class="space-y-2 border-b pb-4">
+        <ng-content select="[itemsCheckout]" />
+    </div>
+
     <div class="space-y-3 text-lg pt-4 border-t">
         <div class="flex justify-between">
             <span>SubTotale:</span>
