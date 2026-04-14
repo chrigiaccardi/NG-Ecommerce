@@ -16,6 +16,13 @@ import { SignInParams, SignUpParams, User } from "./models/user";
 import { Router } from "@angular/router";
 import { Ordine } from "./models/ordine";
 
+// Istalliamo e importiamo @angular-architects/ngrx-toolkit:
+// pacchetto ufficiale di estensioni per NgRx Signals Store creato per semplificare lo state
+// management e la sync automatica con backend/storage
+import { withStorageSync } from '@angular-architects/ngrx-toolkit';
+import ListaDesideri from "./pages/lista-desideri/lista-desideri";
+import { ListaProdottiCarrello } from "./pages/carrello/lista-prodotti-carrello/lista-prodotti-carrello";
+
 export type EcommerceState = {
   prodotti: Prodotto[];
   categoria: string;
@@ -315,6 +322,13 @@ export const EcommerceStore = signalStore(
     user: undefined,
     caricamento: false
   } as EcommerceState),
+
+  // utilizziamo il metodo withStorageSync per poter automaticamente salvare quello che necessitiamo
+  // nel localStorage così che al refresh non si perdano i dati.
+  withStorageSync({
+    key: 'NG-Ecommerce',
+    select: ({listaDesideriItems, prodottiCarrello, user}) => ({listaDesideriItems, prodottiCarrello, user}),
+  }),
     
   // withComputed setta e definisce gli aggiornamenti finali dei signal
   withComputed((store) => ({
@@ -345,6 +359,7 @@ export const EcommerceStore = signalStore(
     setCategoria: signalMethod<string>((categoria: string) => {
       patchState(store, { categoria })
     }),
+
     // Aggiunge un prodotto alla lista desideri
     aggiungiAllaListaDesideri: (prodotto: Prodotto) => {
       // prendamo lo stato attuale della lista desideri (signal)
@@ -361,6 +376,7 @@ export const EcommerceStore = signalStore(
       // utilizziamo il toaster per mandare un 'popup' all'utente e confermare l'aggiunta del prodotto alla lista desideri
       toaster.success('Prodotto aggiunto dalla Lista Desideri')
     },
+
     // Rimuove un prodotto dalla lista dei desideri
     rimuoviDallaListaDesideri: (prodotto: Prodotto) => {
       patchState(store, {
@@ -369,11 +385,13 @@ export const EcommerceStore = signalStore(
       });
       toaster.success('Prodotto rimosso dalla Lista Desideri');
     },
+
     // ripulisce la lista dei desideri 
     pulisciListaDesideri: () => {
       // aggiorna la lista desideri ad un array vuoto quindi cancella tutti i prodotti
       patchState(store, { listaDesideriItems: [] })
     },
+
     // aggiunge al carrello un prodotto
     aggiungiAlCarrello: (prodotto: Prodotto, quantita = 1) => {
       // istanziamo l'esistenza del prodotto per controllare subito se il prodotto esiste oppure no
@@ -400,6 +418,7 @@ export const EcommerceStore = signalStore(
       // Sia qua che sopra utilizziamo il -1 perchè l'array parte da 0 e quindi -1 vuol dire che non esiste il prodotto nell'array
       toaster.success(esistenzaProdotto !== -1 ? 'Prodotto Nuovamente Aggiunto' : 'Prodotto aggiunto al Carrello')
     },
+
     // setta la quandita dei prodotti nel carrello
     setQuantitaProdotto: (params: { idProdotto: string, quantita: number }) => {
       const index = store.prodottiCarrello().findIndex(c => c.prodotto.id === params.idProdotto)
@@ -408,6 +427,7 @@ export const EcommerceStore = signalStore(
       });
       patchState(store, { prodottiCarrello: aggiornamento })
     },
+
     // aggiunge tutta la lista desideri al carrello
     aggiungiListaDesideriAlCarrello: () => {
       const aggiornamentoItemCarrello = produce(store.prodottiCarrello(), (draft) => {
@@ -420,6 +440,7 @@ export const EcommerceStore = signalStore(
       // patchState aggiorna i prodotti nel carrello e azzera l'array della lista desideri
       patchState(store, { prodottiCarrello: aggiornamentoItemCarrello, listaDesideriItems: [] })
     },
+
     // aggiunge un prodotto alla lista desideri e aggiorna il carrello
     daCarrelloAListaDesideri: (prodotto: Prodotto) => {
       // aggiorniamo il carrello rimuovendo il prodotto
@@ -432,10 +453,12 @@ export const EcommerceStore = signalStore(
       });
       patchState(store, { prodottiCarrello: aggiornamentoItemCarrello, listaDesideriItems: aggiornamentoItemListDesideri })
     },
+
     // rimuove il prodotto dal carrello
     rimuoviDalCarrello: (prodotto: Prodotto) => {
       patchState(store, { prodottiCarrello: store.prodottiCarrello().filter(c => c.prodotto.id !== prodotto.id) })
     },
+
     // con checkoutDialog al click apriamo il dialog per il signIn. Il disableClose true impedisce al dialog 
     // di chiudersi se clicchiamo nel background.
     // data.checkout true conferma al MAT_DIALOG_DATA che il dialog è stato aperto nella pagina checkout.
@@ -452,14 +475,17 @@ export const EcommerceStore = signalStore(
       router.navigate(['/checkout'])
    
     },
+
     // metodo per concludere ed effettuare l'ordine
     concludiOrdine: async() => {
       // impostiamo il caricamento a true
       patchState(store, { caricamento: true });
-      // controlliamo che l'utente sia loggato prima di continuare
+      // controlliamo che l'utente sia loggato prima di continuare, se non loggato rimettiamo il caricamento a false
+      // se no rimane true con il bottone su pagamento i corso
       const user = store.user();
       if (!user) {
         toaster.error("Accedi al tuo Account prima di proseguire con l'ordine");
+        patchState(store, { caricamento: false });
         return;
       }
       // istanziamo ordine per come deve essere strutturato: crypto.randomUUID genera un Unico Universale ID
@@ -470,12 +496,14 @@ export const EcommerceStore = signalStore(
         prodottiOrdine: store.prodottiCarrello(),
         statoPagamento: 'Successo'
       };
-      // creiamo un effetto latenza così che ci sia il caricamento di tutto
-      await new Promise((risoluzione) => setTimeout(risoluzione, 1000))
+      // creiamo un effetto latenza di un secondo al metodo così che ci sia il caricamento di tutto
+      await new Promise((risultato) => setTimeout(risultato, 1000))
+      // nel'aggiornamento conclusivo dichiariamo che nello store, il caricamento è false, quindi terminato,
+      // e il carrello si vuota
+      patchState(store, { caricamento: false, prodottiCarrello: [] });
+      // concluso il tutto impostiamo la navigazione verso la pagina di successo.
+      router.navigate(['ordine-completato'])
     },
-
-
-
 
     // con signIn autentichiamo email e password per l'accesso al profilo, in ingresso abbiamo i parametri email, password, checkout e dialogId
     signIn: ({email, password, checkout, dialogId}: SignInParams) => {
@@ -497,6 +525,7 @@ export const EcommerceStore = signalStore(
         router.navigate(['/checkout']);
       }
     },
+
     // signUp è molto simile a signIn
     signUp: ({email, password, name, checkout, dialogId}: SignUpParams) => {
       patchState(store, {
@@ -517,10 +546,11 @@ export const EcommerceStore = signalStore(
         router.navigate(['/checkout']);
       }
     },
+
     // signOut scollega il profilo
     signOut: () => {
       patchState(store, {user: undefined})
-    }
+    },
   })
   )
 )

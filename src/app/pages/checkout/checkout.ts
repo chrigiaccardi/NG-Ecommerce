@@ -6,10 +6,11 @@ import { SommarioOrdine } from "../../components/sommario-ordine/sommario-ordine
 import { EcommerceStore } from '../../ecommerce-store';
 import { CurrencyPipe } from '@angular/common';
 import { MatAnchor } from "@angular/material/button";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-checkout',
-  imports: [BottoneIndietro, FormSpedizione, FormPagamento, SommarioOrdine, CurrencyPipe, MatAnchor],
+  imports: [BottoneIndietro, FormSpedizione, FormPagamento, SommarioOrdine, CurrencyPipe, MatAnchor, RouterLink],
   templateUrl: './checkout.html',
   styleUrl: './checkout.css',
 })

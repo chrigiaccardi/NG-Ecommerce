@@ -1,6 +1,6 @@
 <div class="mx-auto max-w-[1200px] py-6">
     <!-- Riutilizziamo il bottone indietro -->
-    <app-bottone-indietro class="mb-4" navigateTo="/carrello">Ritorna al Carrello</app-bottone-indietro>
+    <app-bottone-indietro class="mb-4" andareVerso="/carrello">Ritorna al Carrello</app-bottone-indietro>
 
     <h1 class="text-3xl font-extrabold mb-4">Checkout</h1>
 
@@ -29,7 +29,7 @@
                 <!-- ng container proietta questo blocco (bottoniAzione) codice al parent -->
                 <ng-container bottoniAzione>
                     <button matButton="filled" class="w-full mt-6 py-3" [disabled]="store.caricamento()" (click)="store.concludiOrdine()">
-                        {{store.caricamento() ? 'Caricamento...' : 'Place Order'}}
+                        {{store.caricamento() ? 'Pagamento in corso...' : 'Effettua il Pagamento'}}
                     </button>
 
                 </ng-container>
