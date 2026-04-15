@@ -1,0 +1,14 @@
+<!-- Creiamo un componente per la disponibilità in magazzino oppure no -->
+ @if (inStock()) {
+    <div class="flex items-center gap-2 border border-gray-200 rounded-lg p-3 bg-white w-full">
+        <mat-icon class="small !text-green-600">check_circle</mat-icon>
+        <span class="text-xs text-gray-800">Disponibile e pronto per l'acquisto</span>
+    </div>
+ } @else {
+    <div class="flex items-center gap-2 border border-red-700 rounded-lg p-3 bg-white w-full danger">
+        <mat-icon class="small !text-yellow-600">warning</mat-icon>
+        <span class="text-xs text-gray-800">
+            In questo momento il prodotto non è disponibile. Aggiungilo alla Lista Desideri!
+        </span>
+    </div>
+ }

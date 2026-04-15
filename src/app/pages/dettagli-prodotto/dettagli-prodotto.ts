@@ -1,10 +1,11 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { EcommerceStore } from '../../ecommerce-store';
 import { BottoneIndietro } from "../../components/bottone-indietro/bottone-indietro";
+import { InfoProdotto } from "./info-prodotto/info-prodotto";
 
 @Component({
   selector: 'app-dettagli-prodotto',
-  imports: [BottoneIndietro],
+  imports: [BottoneIndietro, InfoProdotto],
   templateUrl: './dettagli-prodotto.html',
   styleUrl: './dettagli-prodotto.css',
 })

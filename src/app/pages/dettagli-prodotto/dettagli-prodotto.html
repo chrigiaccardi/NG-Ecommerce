@@ -4,6 +4,17 @@
      che si ritorni indietro non sulla home ma sul link da dove siamo arrivati: se arriviamo da una selezione dentro una specifica
      categoria bisogna ritornare li e non sulla home principale-->
     <app-bottone-indietro class="mb-6" [andareVerso]="routeIniziale()">Continua lo Shopping</app-bottone-indietro>
-
+    
+    <!-- Se selezione prodotto è vero, allora creiamo una sezione apposita divisa in due: 1. immagine grande dle prodotto
+     e a lato tutte le info con un componente apposito. -->
+    @if (store.selezioneProdotto(); as prodotto) {
+        <div class="flex gap-8 mb-8">
+            <img [src]="prodotto.imageUrl" alt="{{prodotto.name}}" class="w-[500px] object-cover rounded-lg">
+            <div class="flex-1">
+                <!-- Creiamo e inseriamo un nuovo componente per le info del prodotto e gli passiamo le info con il binding -->
+                 <app-info-prodotto [prodotto]="prodotto" />
+            </div>
+        </div>
+    }
 
 </div>

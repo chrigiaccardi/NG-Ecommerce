@@ -1,0 +1,42 @@
+<!-- Creiamo la sezione dove verranno inserite tutte le info del prodotto -->
+ <div class="text-xs rounded-xl bg-gray-100 px-2 py-1 w-fit mb-2">
+    {{prodotto().category | titlecase}}
+ </div>
+ <h1 class="text-2xl font-extrabold mb-3">{{prodotto().name}}</h1>
+ <p class="text-3xl font-extrabold mb-4">{{prodotto().price | currency: 'EUR': 'symbol'}}</p>
+
+ <!-- Creiamo un componente Stock per vedere la disponibilità dell'articolo 
+  oppure se non disponibile -->
+  <app-stato-disponibilita-prodotto [inStock]="prodotto().inStock" />
+  <p class="font-semibold mb-2 mt-4">Descrizione</p>
+  <p class="text-gray-600 border-b border-gray-200 pb-4">{{prodotto().description}}</p>
+  <div class="flex items-center gap-2 mb-3 pt-4">
+    <span class="font-semibold">Quantità:</span>
+    <app-selettore-quantita  [quantita]="quantita()" (quantitaAggiornata)="quantita.set($event)" />
+  </div>
+  <div class="flex gap-4 mb border-b border-gray-200 pb-4">
+    <button matButton="filled" class="w-2/3 flex items-center gap-2" 
+    (click)="store.aggiungiAlCarrello(prodotto(), quantita())"
+    [disabled]="!prodotto().inStock">
+    <mat-icon>shopping_cart</mat-icon>
+    {{prodotto().inStock ? 'Aggiungi al Carrello' : 'Non Disponibile'}}
+    </button>
+    <app-bottone-toggle [prodotto]="prodotto()" />
+    <button matIconButton>
+        <mat-icon>share</mat-icon>
+    </button>
+  </div>
+  <div class="pt-6 flex flex-col gap-2 text-gray-700 text-xs">
+    <div class="flex items-center gap-3">
+        <mat-icon class="small">local_shipping</mat-icon>
+        <span>Spedizione Gratuita per un ordine superiore a 100€</span>
+    </div>
+    <div class="flex items-center gap-3">
+        <mat-icon class="small">autorenew</mat-icon>
+        <span>Rimborso entro 30 giorni dall'acquisto</span>
+    </div>
+    <div class="flex items-center gap-3">
+        <mat-icon class="small">shield</mat-icon>
+        <span>2 anni di Garanzia inclusa nel Prezzo</span>
+    </div>
+  </div>

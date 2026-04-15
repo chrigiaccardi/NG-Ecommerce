@@ -28,7 +28,7 @@
             <!-- Nel bottone impostiamo che è disabilitato se inStock è falso e al click utilizziamo il metodo creato nello store-->
             <button matButton="filled" class="flex items-center gap-2" [disabled]="!prodotto().inStock" (click)="store.aggiungiAlCarrello(prodotto())">
                 <mat-icon>shopping_cart</mat-icon>
-                Acquista
+                {{prodotto().inStock ? 'Acquista' : 'Non Disponibile'}}
             </button>
         </div>
     </div>
