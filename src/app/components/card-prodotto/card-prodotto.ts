@@ -3,12 +3,12 @@ import { Prodotto } from '../../models/prodotto';
 import { CurrencyPipe } from '@angular/common';
 import { MatAnchor, MatIconButton } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
-import { BottoneToggle } from "../bottone-toggle/bottone-toggle";
 import { EcommerceStore } from '../../ecommerce-store';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-card-prodotto',
-  imports: [CurrencyPipe, MatAnchor, MatIcon],
+  imports: [CurrencyPipe, MatAnchor, MatIcon, RouterLink],
   templateUrl: './card-prodotto.html',
   styleUrl: './card-prodotto.css',
 })

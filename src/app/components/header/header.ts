@@ -1,11 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AzioniHeader } from "../azioni-header/azioni-header";
+import { RouterLink } from "@angular/router";
+import { MatAnchor } from "@angular/material/button";
 
 
 @Component({
   selector: 'app-header',
-  imports: [MatToolbarModule, AzioniHeader],
+  imports: [MatToolbarModule, AzioniHeader, RouterLink, MatAnchor],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })

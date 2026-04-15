@@ -20,8 +20,7 @@ import { Ordine } from "./models/ordine";
 // pacchetto ufficiale di estensioni per NgRx Signals Store creato per semplificare lo state
 // management e la sync automatica con backend/storage
 import { withStorageSync } from '@angular-architects/ngrx-toolkit';
-import ListaDesideri from "./pages/lista-desideri/lista-desideri";
-import { ListaProdottiCarrello } from "./pages/carrello/lista-prodotti-carrello/lista-prodotti-carrello";
+
 
 export type EcommerceState = {
   prodotti: Prodotto[];
@@ -29,7 +28,9 @@ export type EcommerceState = {
   listaDesideriItems: Prodotto[];
   prodottiCarrello: ProdottiCarrello[];
   user: User | undefined;
-  caricamento: boolean
+  caricamento: boolean;
+  selezioneIdProdotto: string | undefined,
+
 }
 
 export const EcommerceStore = signalStore(
@@ -320,7 +321,8 @@ export const EcommerceStore = signalStore(
     listaDesideriItems: [],
     prodottiCarrello: [],
     user: undefined,
-    caricamento: false
+    caricamento: false,
+    selezioneIdProdotto: undefined,
   } as EcommerceState),
 
   // utilizziamo il metodo withStorageSync per poter automaticamente salvare quello che necessitiamo
@@ -350,14 +352,27 @@ export const EcommerceStore = signalStore(
     // 0 è il valore iniziale e ogni volta somma la quantità dell'item all'accomulatore partendo da 0.
     // il matBadge così si aggiorna non in base ai prodotti nell'array ma alla quantità totale dell'array.
     conteggioCarrello: computed(() => store.prodottiCarrello().reduce((acc, item) => acc + item.quantita, 0)),
+
+     // con selezione Prodotto andiamo a selezionare il prodotto specifico in base al suo ID per poter
+    // visualizzare i dettagli del prodotto cliccato
+    selezioneProdotto: computed(() => store.prodotti().find((p) => p.id === store.selezioneIdProdotto()))
   })),
+
+   
   
   // con withMethod creiamo dei metodi per aggiornare gli stati, in questo caso set categoria accoglie in input una categoria string
   // e la va a settare nello store aggiornando solamente lo stato categoria.
   // signalMethod restituisce un signal al posto di void, utile per operazioni asincrone con reattività.
   withMethods((store, toaster = inject(Toaster), matDialog = inject(MatDialog), router = inject(Router)) => ({
+
+    // setta la categoria per la route
     setCategoria: signalMethod<string>((categoria: string) => {
       patchState(store, { categoria })
+    }),
+
+    // setta ID prodotto per la route
+    setIdProdotto: signalMethod<string>((idProdotto: string) => {
+      patchState(store, {selezioneIdProdotto: idProdotto})
     }),
 
     // Aggiunge un prodotto alla lista desideri
