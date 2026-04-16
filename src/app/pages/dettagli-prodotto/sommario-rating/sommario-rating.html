@@ -1,4 +1,27 @@
-<!-- Creiamo la visualizzazione delle barre per ogni stella della percentuale di recensioni che ci sono -->
- <div class="flex items-center gap-8 mb-6 p-4 bg-gray-50 rounded-lg">
-    
- </div>
+<!-- Creiamo la 1a sezione del rating -->
+<div class="flex items-center gap-8 mb-6 p-4 bg-gray-50 rounded-lg">
+    <div class="flex flex-col items-center w-1/2">
+        <!-- Numero grande di rating -->
+        <div class="text-4xl font-bold text-gray-900 mb-1"> {{prodotto().rating}} </div>
+        <!-- Stelle rating - component dedicato -->
+        <div class="flex items-center mb-2">
+            <app-stelle-recensioni [rating]="prodotto().rating" />
+        </div>
+        <!-- Rating su quante recensioni ci sono -->
+        <div class="text-sm text-gray-500"> Basato su {{recensioniTotali()}} recensioni</div>
+    </div>
+
+    <!-- Creiamo la 2a visualizzazione per le barre per ogni stella della percentuale di recensioni che ci sono -->
+    <div class="flex-1">
+        @for (livello of livelliRating(); track livello.stelle) {
+        <div class="flex items-center gap-2 mb-2">
+            <span class="text-sm w-4">{{livello.stelle}} ⭐️</span>
+            <div class="flex-1 bg-gray-200 rounded-full h-2 mx-2">
+                <div class="bg-yellow-400 h-2 rounded-full transition-all duration-300"
+                    [style.width.%]="livello.percentuale"></div>
+            </div>
+            <span class="text-sm text-gray-600 w-8 text-right">{{livello.conteggio}}</span>
+        </div>
+        }
+    </div>
+</div>

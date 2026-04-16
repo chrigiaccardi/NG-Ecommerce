@@ -1,9 +1,11 @@
 import { Component, computed, input } from '@angular/core';
 import { Prodotto } from '../../../models/prodotto';
+import { StelleRecensioni } from "../../../components/stelle-recensioni/stelle-recensioni";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: 'app-sommario-rating',
-  imports: [],
+  imports: [StelleRecensioni, MatIconModule],
   templateUrl: './sommario-rating.html',
   styleUrl: './sommario-rating.css',
 })

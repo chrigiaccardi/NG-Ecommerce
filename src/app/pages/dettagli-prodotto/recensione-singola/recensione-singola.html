@@ -1,0 +1,20 @@
+<!-- Creiamo il componente per la visualizzazione della singola recensione -->
+ <div appPannelloCarrello>
+    <div class="flex items-start gap-4">
+        <!-- Inseriamo l'immagine tonda dell'utente -->
+        <img [src]="recensione().urlImgUtente" [alt]="recensione().nomeUtente" class="w-10 h-10 rounded-full">
+        <div>
+            <!-- Inseriamo il nome dell'utente -->
+            <div class="text-lg font-semibold">{{recensione().nomeUtente}}</div>
+            <!-- Inseriamo le stelle della recensione e la data in qui e stata fatta, con la sua formattazione (DatePipe) -->
+            <div class="flex items-center mb-1">
+                <app-stelle-recensioni [rating]="recensione().rating" />
+                <div class="text-sm text-gray-500">{{recensione().dataRecensione | date: 'dd/MM/yyyy' }}</div>
+            </div>
+            <!-- Inseriamo il titolo della recensione -->
+            <div class="text-base font-semibold mb-1">{{recensione().titolo}}</div>
+            <!-- Inseriamo il commento della recensione -->
+            <div class="text-sm text-gray-500">{{recensione().commento}}</div>
+        </div>
+    </div>
+ </div>
