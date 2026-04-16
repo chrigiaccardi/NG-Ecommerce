@@ -3,6 +3,14 @@
     {{prodotto().category | titlecase}}
  </div>
  <h1 class="text-2xl font-extrabold mb-3">{{prodotto().name}}</h1>
+
+ <!-- Inseriamo il componente delle stelle recensioni,all'interno inseriamo quello che si vuole
+  venga visualizzato vicino alle stelle -->
+
+ <app-stelle-recensioni class="mb-3 block" [rating]="prodotto().rating">
+  {{prodotto().rating}} ({{prodotto().reviewCount}} recensioni)
+ </app-stelle-recensioni>
+
  <p class="text-3xl font-extrabold mb-4">{{prodotto().price | currency: 'EUR': 'symbol'}}</p>
 
  <!-- Creiamo un componente Stock per vedere la disponibilità dell'articolo 

@@ -16,7 +16,13 @@
         <h3 class="text-lg font-semibold text-gray-900 mb-2 leading-tight"> {{prodotto().name}} </h3>
         <p class="text-sm text-gray-600 mb-4 flex-1 leading-relaxed"> {{prodotto().description}}</p>
 
-        <!-- aggiungere rating component -->
+        <!-- In questo div creiamo e inseriamo il componente per stelle recensioni
+         e all'interno inseriamo il testo che vogliamo visualizzare di fianco alle stelle.
+         In questo caso inseriamo il numero delle recensioni per questo prodotto -->
+         <app-stelle-recensioni class="mb-3" [rating]="prodotto().rating">
+            ({{prodotto().reviewCount}})
+         </app-stelle-recensioni>
+
         
         <!-- nel div dello stoccaggio, usiamo l'espressione con l'operatore ternario per confermare se è true
          allora Disponibile se è false inStock allora Non Disponibile, nella classe stessa cosa per colorare il testo -->

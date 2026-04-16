@@ -40,283 +40,380 @@ export const EcommerceStore = signalStore(
     
   // withState definisce lo stato iniziale, i vari signals iniziali pronti per essere modificati o utilizzati
   withState({
-    prodotti: [
-      // ELETTRONICA
-      {
-        id: '1',
-        name: 'Smartphone XPro 12',
-        description: 'Smartphone con display AMOLED e fotocamera da 64MP.',
-        price: 699.99,
-        imageUrl: 'https://images.unsplash.com/photo-1640936343842-268f9d87e764?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8c21hcnRwaG9uZXxlbnwwfHwwfHx8MA%3D%3D',
-        rating: 4.5,
-        reviewCount: 120,
-        inStock: true,
-        category: 'elettronica'
-      },
-      {
-        id: '2',
-        name: 'Cuffie Wireless NoiseFree',
-        description: 'Cuffie con cancellazione del rumore e autonomia di 30 ore.',
-        price: 129.99,
-        imageUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3VmZmllJTIwd2lyZWxlc3N8ZW58MHx8MHx8fDA%3D',
-        rating: 4.3,
-        reviewCount: 85,
-        inStock: true,
-        category: 'elettronica'
-      },
-      {
-        id: '3',
-        name: 'Smartwatch FitLife',
-        description: 'Orologio intelligente con monitoraggio attività e battito cardiaco.',
-        price: 89.99,
-        imageUrl: 'https://media.istockphoto.com/id/2197192316/it/foto/orologio-intelligente-con-monitoraggio-del-polso-cardiaco-sullo-schermo-isolato-su-grigio-app.webp?a=1&b=1&s=612x612&w=0&k=20&c=gaXd_oC50Tp-93my9QBCky946tXBfl8RmIlMyE6CdJ4=',
-        rating: 4.2,
-        reviewCount: 60,
-        inStock: true,
-        category: 'elettronica'
-      },
-      {
-        id: '4',
-        name: 'Tablet MediaPlus 10',
-        description: 'Tablet da 10 pollici ideale per lavoro e intrattenimento.',
-        price: 249.99,
-        imageUrl: 'https://images.unsplash.com/photo-1542751110-97427bbecf20?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dGFibGV0fGVufDB8fDB8fHww',
-        rating: 4.1,
-        reviewCount: 40,
-        inStock: false,
-        category: 'elettronica'
-      },
 
-      // ABBIGLIAMENTO
-      {
-        id: '5',
-        name: 'T-shirt Basic Cotone',
-        description: 'Maglietta in cotone 100% disponibile in vari colori.',
-        price: 14.99,
-        imageUrl: 'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dCUyMHNoaXJ0fGVufDB8fDB8fHww',
-        rating: 4.0,
-        reviewCount: 150,
-        inStock: true,
-        category: 'abbigliamento'
-      },
-      {
-        id: '6',
-        name: 'Jeans Slim Fit',
-        description: 'Jeans aderenti dal design moderno.',
-        price: 49.99,
-        imageUrl: 'https://images.unsplash.com/photo-1714143136372-ddaf8b606da7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8amVhbnMlMjBzbGltJTIwZml0fGVufDB8fDB8fHww',
-        rating: 4.4,
-        reviewCount: 90,
-        inStock: true,
-        category: 'abbigliamento'
-      },
-      {
-        id: '7',
-        name: 'Giacca Invernale WarmPro',
-        description: 'Giacca imbottita resistente al freddo intenso.',
-        price: 119.99,
-        imageUrl: 'https://images.unsplash.com/photo-1715608720717-ac3d1b638e44?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGdpYWNjYSUyMGludmVybmFsZSUyMHdhcm0lMjBwcm98ZW58MHx8MHx8fDA%3D',
-        rating: 4.6,
-        reviewCount: 70,
-        inStock: true,
-        category: 'abbigliamento'
-      },
-      {
-        id: '8',
-        name: 'Sneakers Urban Style',
-        description: 'Scarpe sportive comode per uso quotidiano.',
-        price: 69.99,
-        imageUrl: 'https://media.istockphoto.com/id/925328590/it/foto/scarpe-da-corsa-su-sfondo-bianco.webp?a=1&b=1&s=612x612&w=0&k=20&c=Iq_UI-BTbS7WHxulBCZ95wrbLJz6EndOC0OfoRAiO_0=',
-        rating: 4.3,
-        reviewCount: 110,
-        inStock: false,
-        category: 'abbigliamento'
-      },
+    prodotti:[
+  // ELETTRONICA
+  {
+    id: '1',
+    name: 'Smartphone XPro 12',
+    description: 'Smartphone con display AMOLED e fotocamera da 64MP.',
+    price: 699.99,
+    imageUrl: 'https://images.unsplash.com/photo-1640936343842-268f9d87e764?w=500&auto=format&fit=crop&q=60',
+    rating: 4.5,
+    reviewCount: 120,
+    inStock: true,
+    category: 'elettronica',
+    recensioni: [
+      { id: 'r1-1', idProdotto: '1', nomeUtente: 'Luca Bianchi', urlImgUtente: 'https://i.pravatar.cc/150?u=luca', rating: 5, titolo: 'Eccezionale', commento: 'Display stupendo e batteria infinita. Molto soddisfatto.', dataRecensione: new Date('2026-03-10') },
+      { id: 'r1-2', idProdotto: '1', nomeUtente: 'Sara Rossi', urlImgUtente: 'https://i.pravatar.cc/150?u=sara', rating: 4, titolo: 'Ottimo smartphone', commento: 'Veloce e reattivo, l\'unico difetto è che scivola facilmente dalle mani.', dataRecensione: new Date('2026-02-15') }
+    ]
+  },
+  {
+    id: '2',
+    name: 'Cuffie Wireless NoiseFree',
+    description: 'Cuffie con cancellazione del rumore e autonomia di 30 ore.',
+    price: 129.99,
+    imageUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60',
+    rating: 5,
+    reviewCount: 85,
+    inStock: true,
+    category: 'elettronica',
+    recensioni: [
+      { id: 'r2-1', idProdotto: '2', nomeUtente: 'Marco Verdi', urlImgUtente: 'https://i.pravatar.cc/150?u=marco', rating: 5, titolo: 'Spettacolari', commento: 'Cancellazione del rumore top. Perfette per l\'ufficio.', dataRecensione: new Date('2026-04-01') },
+      { id: 'r2-2', idProdotto: '2', nomeUtente: 'Giulia Neri', urlImgUtente: 'https://i.pravatar.cc/150?u=giulia', rating: 5, titolo: 'Le adoro', commento: 'Comodissime e la batteria dura tantissimo, le carico una volta a settimana.', dataRecensione: new Date('2026-01-20') }
+    ]
+  },
+  {
+    id: '3',
+    name: 'Smartwatch FitLife',
+    description: 'Orologio intelligente con monitoraggio attività e battito cardiaco.',
+    price: 89.99,
+    imageUrl: 'https://media.istockphoto.com/id/2197192316/it/foto/orologio-intelligente.webp',
+    rating: 4.2,
+    reviewCount: 60,
+    inStock: true,
+    category: 'elettronica',
+    recensioni: [
+      { id: 'r3-1', idProdotto: '3', nomeUtente: 'Antonio Fabbri', urlImgUtente: 'https://i.pravatar.cc/150?u=antonio', rating: 4, titolo: 'Buon rapporto qualità prezzo', commento: 'Fa il suo dovere per il tracciamento sportivo. App migliorabile.', dataRecensione: new Date('2025-11-05') },
+      { id: 'r3-2', idProdotto: '3', nomeUtente: 'Elena Gialli', urlImgUtente: 'https://i.pravatar.cc/150?u=elena', rating: 5, titolo: 'Perfetto per i miei allenamenti', commento: 'Preciso nel battito e bello da vedere.', dataRecensione: new Date('2026-02-11') }
+    ]
+  },
+  {
+    id: '4',
+    name: 'Tablet MediaPlus 10',
+    description: 'Tablet da 10 pollici ideale per lavoro e intrattenimento.',
+    price: 249.99,
+    imageUrl: 'https://images.unsplash.com/photo-1542751110-97427bbecf20?w=500&auto=format&fit=crop&q=60',
+    rating: 4.1,
+    reviewCount: 40,
+    inStock: false,
+    category: 'elettronica',
+    recensioni: [
+      { id: 'r4-1', idProdotto: '4', nomeUtente: 'Lorenzo Costa', urlImgUtente: 'https://i.pravatar.cc/150?u=lorenzo', rating: 4, titolo: 'Ottimo per Netflix', commento: 'Schermo luminoso, ottimo per guardare serie TV. Fotocamere non eccezionali.', dataRecensione: new Date('2026-03-22') },
+      { id: 'r4-2', idProdotto: '4', nomeUtente: 'Martina Ricci', urlImgUtente: 'https://i.pravatar.cc/150?u=martina', rating: 4, titolo: 'Valido per lo studio', commento: 'Lo uso all\'università ed è comodo, ma un po\' pesante.', dataRecensione: new Date('2025-10-18') }
+    ]
+  },
 
-      // CASA
-      {
-        id: '9',
-        name: 'Lampada LED Moderna',
-        description: 'Lampada da tavolo con luce regolabile.',
-        price: 39.99,
-        imageUrl: 'https://images.unsplash.com/photo-1766411503489-c6fe7b008bd6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGFtcGFkYSUyMGxlZCUyMG1vZGVybmF8ZW58MHx8MHx8fDA%3D',
-        rating: 4.2,
-        reviewCount: 55,
-        inStock: true,
-        category: 'casa'
-      },
-      {
-        id: '10',
-        name: 'Set Pentole Acciaio',
-        description: 'Set di pentole in acciaio inox per ogni esigenza.',
-        price: 89.99,
-        imageUrl: 'https://images.unsplash.com/photo-1584990347193-6bebebfeaeee?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c2V0JTIwcGVudG9sZSUyMGFjY2lhaW98ZW58MHx8MHx8fDA%3D',
-        rating: 4.5,
-        reviewCount: 75,
-        inStock: true,
-        category: 'casa'
-      },
-      {
-        id: '11',
-        name: 'Aspirapolvere TurboClean',
-        description: 'Aspirapolvere potente e silenzioso.',
-        price: 159.99,
-        imageUrl: 'https://media.istockphoto.com/id/1489556409/it/foto/aspirapolvere-isolato-su-sfondo-bianco.webp?a=1&b=1&s=612x612&w=0&k=20&c=Bl4aBvrj84usnvziUXEzItvz4qxUXu3j4V6G1OGtPfg=',
-        rating: 4.4,
-        reviewCount: 65,
-        inStock: true,
-        category: 'casa'
-      },
-      {
-        id: '12',
-        name: 'Cuscino Memory Foam',
-        description: 'Cuscino ergonomico per un sonno confortevole.',
-        price: 29.99,
-        imageUrl: 'https://media.istockphoto.com/id/2207660314/it/foto/cuscino-ortopedico-in-memory-foam-per-un-sonno-confortevole.webp?a=1&b=1&s=612x612&w=0&k=20&c=Jpynwqr3fngmOoCLYa9XcXUFtRH6FFK4_m8wj2RgFCg=',
-        rating: 4.3,
-        reviewCount: 50,
-        inStock: true,
-        category: 'casa'
-      },
+  // ABBIGLIAMENTO
+  {
+    id: '5',
+    name: 'T-shirt Basic Cotone',
+    description: 'Maglietta in cotone 100% disponibile in vari colori.',
+    price: 14.99,
+    imageUrl: 'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500&auto=format&fit=crop&q=60',
+    rating: 3.0,
+    reviewCount: 150,
+    inStock: true,
+    category: 'abbigliamento',
+    recensioni: [
+      { id: 'r5-1', idProdotto: '5', nomeUtente: 'Paolo Romano', urlImgUtente: 'https://i.pravatar.cc/150?u=paolo', rating: 2, titolo: 'Si restringe', commento: 'Dopo il primo lavaggio si è rimpicciolita parecchio. Peccato.', dataRecensione: new Date('2026-02-01') },
+      { id: 'r5-2', idProdotto: '5', nomeUtente: 'Chiara Marino', urlImgUtente: 'https://i.pravatar.cc/150?u=chiara', rating: 4, titolo: 'Cotone di buona qualità', commento: 'Per il prezzo va benissimo, veste un po\' larga.', dataRecensione: new Date('2026-03-30') }
+    ]
+  },
+  {
+    id: '6',
+    name: 'Jeans Slim Fit',
+    description: 'Jeans aderenti dal design moderno.',
+    price: 49.99,
+    imageUrl: 'https://images.unsplash.com/photo-1714143136372-ddaf8b606da7?w=500&auto=format&fit=crop&q=60',
+    rating: 4.4,
+    reviewCount: 90,
+    inStock: true,
+    category: 'abbigliamento',
+    recensioni: [
+      { id: 'r6-1', idProdotto: '6', nomeUtente: 'Stefano Greco', urlImgUtente: 'https://i.pravatar.cc/150?u=stefano', rating: 5, titolo: 'Vestibilità perfetta', commento: 'Il tessuto è leggermente elasticizzato, comodissimi.', dataRecensione: new Date('2025-12-10') },
+      { id: 'r6-2', idProdotto: '6', nomeUtente: 'Francesca Leone', urlImgUtente: 'https://i.pravatar.cc/150?u=francesca', rating: 4, titolo: 'Belli', commento: 'Bel colore, tengono bene la forma anche dopo l\'uso frequente.', dataRecensione: new Date('2026-01-25') }
+    ]
+  },
+  {
+    id: '7',
+    name: 'Giacca Invernale WarmPro',
+    description: 'Giacca imbottita resistente al freddo intenso.',
+    price: 119.99,
+    imageUrl: 'https://images.unsplash.com/photo-1715608720717-ac3d1b638e44?w=500&auto=format&fit=crop&q=60',
+    rating: 2.6,
+    reviewCount: 70,
+    inStock: true,
+    category: 'abbigliamento',
+    recensioni: [
+      { id: 'r7-1', idProdotto: '7', nomeUtente: 'Giacomo Conti', urlImgUtente: 'https://i.pravatar.cc/150?u=giacomo', rating: 2, titolo: 'Non molto calda', commento: 'Per il prezzo mi aspettavo tenesse più caldo, cerniera fragile.', dataRecensione: new Date('2025-11-20') },
+      { id: 'r7-2', idProdotto: '7', nomeUtente: 'Silvia Bruno', urlImgUtente: 'https://i.pravatar.cc/150?u=silvia', rating: 3, titolo: 'Solo estetica', commento: 'Molto bella da vedere ma i materiali non sono eccelsi.', dataRecensione: new Date('2026-01-05') }
+    ]
+  },
+  {
+    id: '8',
+    name: 'Sneakers Urban Style',
+    description: 'Scarpe sportive comode per uso quotidiano.',
+    price: 69.99,
+    imageUrl: 'https://media.istockphoto.com/id/925328590/it/foto/scarpe-da-corsa.webp',
+    rating: 4.3,
+    reviewCount: 110,
+    inStock: false,
+    category: 'abbigliamento',
+    recensioni: [
+      { id: 'r8-1', idProdotto: '8', nomeUtente: 'Roberto Gallo', urlImgUtente: 'https://i.pravatar.cc/150?u=roberto', rating: 5, titolo: 'Comode per camminare', commento: 'Sembra di camminare sulle nuvole, taglia perfetta.', dataRecensione: new Date('2026-03-05') },
+      { id: 'r8-2', idProdotto: '8', nomeUtente: 'Alessia De Santis', urlImgUtente: 'https://i.pravatar.cc/150?u=alessia', rating: 4, titolo: 'Buone', commento: 'Ottimo design, si sporcano facilmente ma si lavano in lavatrice senza problemi.', dataRecensione: new Date('2026-04-12') }
+    ]
+  },
 
-      // SPORT
-      {
-        id: '13',
-        name: 'Tappetino Yoga Comfort',
-        description: 'Tappetino antiscivolo per yoga e fitness.',
-        price: 24.99,
-        imageUrl: 'https://images.unsplash.com/photo-1592432678016-e910b452f9a2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dGFwcGV0aW5vJTIweW9nYXxlbnwwfHwwfHx8MA%3D%3D',
-        rating: 4.5,
-        reviewCount: 80,
-        inStock: true,
-        category: 'sport'
-      },
-      {
-        id: '14',
-        name: 'Manubri Regolabili',
-        description: 'Set di pesi regolabili per allenamento a casa.',
-        price: 79.99,
-        imageUrl: 'https://images.unsplash.com/photo-1703668984128-b506579acdd2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnVicmklMjByZWdvbGFiaWxpJTIwZ3ltfGVufDB8fDB8fHww',
-        rating: 4.6,
-        reviewCount: 95,
-        inStock: true,
-        category: 'sport'
-      },
-      {
-        id: '15',
-        name: 'Bici da Città UrbanBike',
-        description: 'Bicicletta comoda per spostamenti urbani.',
-        price: 299.99,
-        imageUrl: 'https://images.unsplash.com/photo-1627363707801-543bdb44faf3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YmljaSUyMHVyYmFufGVufDB8fDB8fHww',
-        rating: 4.2,
-        reviewCount: 40,
-        inStock: false,
-        category: 'sport'
-      },
-      {
-        id: '16',
-        name: 'Scarpe Running ProRun',
-        description: 'Scarpe leggere per corsa e allenamento.',
-        price: 89.99,
-        imageUrl: 'https://images.unsplash.com/photo-1562183241-b937e95585b6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2NhcnBlJTIwcnVubmluZ3xlbnwwfHwwfHx8MA%3D%3D',
-        rating: 4.4,
-        reviewCount: 120,
-        inStock: true,
-        category: 'sport'
-      },
+  // CASA
+  {
+    id: '9',
+    name: 'Lampada LED Moderna',
+    description: 'Lampada da tavolo con luce regolabile.',
+    price: 39.99,
+    imageUrl: 'https://images.unsplash.com/photo-1766411503489-c6fe7b008bd6?w=500&auto=format&fit=crop&q=60',
+    rating: 3.2,
+    reviewCount: 55,
+    inStock: true,
+    category: 'casa',
+    recensioni: [
+      { id: 'r9-1', idProdotto: '9', nomeUtente: 'Matteo Ferrari', urlImgUtente: 'https://i.pravatar.cc/150?u=matteo', rating: 3, titolo: 'Carina ma instabile', commento: 'Fa una bella luce ma la base è troppo leggera e tende a cadere.', dataRecensione: new Date('2025-09-15') },
+      { id: 'r9-2', idProdotto: '9', nomeUtente: 'Valentina Fiore', urlImgUtente: 'https://i.pravatar.cc/150?u=valentina', rating: 4, titolo: 'Ottima luce', commento: 'Design minimale molto bello per la scrivania. Touch reattivo.', dataRecensione: new Date('2026-02-28') }
+    ]
+  },
+  {
+    id: '10',
+    name: 'Set Pentole Acciaio',
+    description: 'Set di pentole in acciaio inox per ogni esigenza.',
+    price: 89.99,
+    imageUrl: 'https://images.unsplash.com/photo-1584990347193-6bebebfeaeee?w=500&auto=format&fit=crop&q=60',
+    rating: 4.5,
+    reviewCount: 75,
+    inStock: true,
+    category: 'casa',
+    recensioni: [
+      { id: 'r10-1', idProdotto: '10', nomeUtente: 'Lucia Rinaldi', urlImgUtente: 'https://i.pravatar.cc/150?u=lucia', rating: 5, titolo: 'Qualità eccellente', commento: 'Acciaio pesante, fondo spesso. Perfette anche per induzione.', dataRecensione: new Date('2026-01-10') },
+      { id: 'r10-2', idProdotto: '10', nomeUtente: 'Davide Gatti', urlImgUtente: 'https://i.pravatar.cc/150?u=davide', rating: 4, titolo: 'Molto valide', commento: 'Si puliscono facilmente in lavastoviglie. Consigliate.', dataRecensione: new Date('2025-12-02') }
+    ]
+  },
+  {
+    id: '11',
+    name: 'Aspirapolvere TurboClean',
+    description: 'Aspirapolvere potente e silenzioso.',
+    price: 159.99,
+    imageUrl: 'https://media.istockphoto.com/id/1489556409/it/foto/aspirapolvere.webp',
+    rating: 4.4,
+    reviewCount: 65,
+    inStock: true,
+    category: 'casa',
+    recensioni: [
+      { id: 'r11-1', idProdotto: '11', nomeUtente: 'Giorgio Moretti', urlImgUtente: 'https://i.pravatar.cc/150?u=giorgio', rating: 5, titolo: 'Potenza pura', commento: 'Aspira benissimo i peli del gatto dai tappeti. Maneggevole.', dataRecensione: new Date('2026-03-08') },
+      { id: 'r11-2', idProdotto: '11', nomeUtente: 'Federica Ruju', urlImgUtente: 'https://i.pravatar.cc/150?u=federica', rating: 4, titolo: 'Buon prodotto', commento: 'Non è super silenzioso come descritto, ma la potenza compensa.', dataRecensione: new Date('2026-02-14') }
+    ]
+  },
+  {
+    id: '12',
+    name: 'Cuscino Memory Foam',
+    description: 'Cuscino ergonomico per un sonno confortevole.',
+    price: 29.99,
+    imageUrl: 'https://media.istockphoto.com/id/2207660314/it/foto/cuscino.webp',
+    rating: 5.0, // Aggiustato per coerenza, prima era 5.3
+    reviewCount: 50,
+    inStock: true,
+    category: 'casa',
+    recensioni: [
+      { id: 'r12-1', idProdotto: '12', nomeUtente: 'Simone Riva', urlImgUtente: 'https://i.pravatar.cc/150?u=simone', rating: 5, titolo: 'Mai più dolori', commento: 'Mi svegliavo sempre con dolore alla cervicale, questo cuscino ha risolto il problema.', dataRecensione: new Date('2026-01-22') },
+      { id: 'r12-2', idProdotto: '12', nomeUtente: 'Laura Santini', urlImgUtente: 'https://i.pravatar.cc/150?u=laura', rating: 5, titolo: 'Dormo benissimo', commento: 'Sostiene il collo alla perfezione. Inizialmente ha un po\' di odore di fabbrica, passa in 2 giorni.', dataRecensione: new Date('2026-04-05') }
+    ]
+  },
 
-      // LIBRI
-      {
-        id: '17',
-        name: 'Il Mistero della Notte',
-        description: 'Romanzo thriller avvincente.',
-        price: 12.99,
-        imageUrl: 'https://images.unsplash.com/photo-1610703032634-182905cc3d7b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bGlicm8lMjBpbCUyMG1pc3Rlcm9kJTIwZWxsYSUyMG5vdGV8ZW58MHx8MHx8fDA%3D',
-        rating: 4.1,
-        reviewCount: 30,
-        inStock: true,
-        category: 'libri'
-      },
-      {
-        id: '18',
-        name: 'Guida alla Programmazione',
-        description: 'Manuale pratico per sviluppatori.',
-        price: 29.99,
-        imageUrl: 'https://images.unsplash.com/photo-1565229284535-2cbbe3049123?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGxpYnJvJTIwcHJvZ3JhbW1hemlvbmV8ZW58MHx8MHx8fDA%3D',
-        rating: 4.7,
-        reviewCount: 60,
-        inStock: true,
-        category: 'libri'
-      },
-      {
-        id: '19',
-        name: 'Cucina Italiana Tradizionale',
-        description: 'Ricette autentiche della cucina italiana.',
-        price: 19.99,
-        imageUrl: 'https://images.unsplash.com/photo-1627907228175-2bf846a303b4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGlicm8lMjBjdWNpbmF8ZW58MHx8MHx8fDA%3D',
-        rating: 4.5,
-        reviewCount: 45,
-        inStock: true,
-        category: 'libri'
-      },
-      {
-        id: '20',
-        name: 'Mindfulness Quotidiana',
-        description: 'Libro per migliorare il benessere mentale.',
-        price: 15.99,
-        imageUrl: 'https://images.unsplash.com/photo-1760161627217-3f0124023664?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bGlicm8lMjBtaW5kZnVsbG5lc3N8ZW58MHx8MHx8fDA%3D',
-        rating: 4.3,
-        reviewCount: 38,
-        inStock: true,
-        category: 'libri'
-      },
+  // SPORT
+  {
+    id: '13',
+    name: 'Tappetino Yoga Comfort',
+    description: 'Tappetino antiscivolo per yoga e fitness.',
+    price: 24.99,
+    imageUrl: 'https://images.unsplash.com/photo-1592432678016-e910b452f9a2?w=500&auto=format&fit=crop&q=60',
+    rating: 4.5,
+    reviewCount: 80,
+    inStock: true,
+    category: 'sport',
+    recensioni: [
+      { id: 'r13-1', idProdotto: '13', nomeUtente: 'Caterina Dalla', urlImgUtente: 'https://i.pravatar.cc/150?u=caterina', rating: 5, titolo: 'Spessore perfetto', commento: 'Non fa male le ginocchia e grip eccellente, non scivola.', dataRecensione: new Date('2025-10-12') },
+      { id: 'r13-2', idProdotto: '13', nomeUtente: 'Enrico Piras', urlImgUtente: 'https://i.pravatar.cc/150?u=enrico', rating: 4, titolo: 'Ottimo per allenarsi in casa', commento: 'Si pulisce facilmente. Unica pecca: è un po\' pesante da portare in palestra.', dataRecensione: new Date('2026-03-14') }
+    ]
+  },
+  {
+    id: '14',
+    name: 'Manubri Regolabili',
+    description: 'Set di pesi regolabili per allenamento a casa.',
+    price: 79.99,
+    imageUrl: 'https://images.unsplash.com/photo-1703668984128-b506579acdd2?w=500&auto=format&fit=crop&q=60',
+    rating: 4.6,
+    reviewCount: 95,
+    inStock: true,
+    category: 'sport',
+    recensioni: [
+      { id: 'r14-1', idProdotto: '14', nomeUtente: 'Dario Monti', urlImgUtente: 'https://i.pravatar.cc/150?u=dario', rating: 5, titolo: 'Ideali per l\'home gym', commento: 'Cambiare i dischi è veloce e la valigetta è comodissima.', dataRecensione: new Date('2026-02-05') },
+      { id: 'r14-2', idProdotto: '14', nomeUtente: 'Andrea Barbieri', urlImgUtente: 'https://i.pravatar.cc/150?u=andrea', rating: 4, titolo: 'Robusti', commento: 'Dischi in ghisa di buona qualità. Le impugnature sono un po\' ruvide.', dataRecensione: new Date('2026-01-18') }
+    ]
+  },
+  {
+    id: '15',
+    name: 'Bici da Città UrbanBike',
+    description: 'Bicicletta comoda per spostamenti urbani.',
+    price: 299.99,
+    imageUrl: 'https://images.unsplash.com/photo-1627363707801-543bdb44faf3?w=500&auto=format&fit=crop&q=60',
+    rating: 1.2,
+    reviewCount: 40,
+    inStock: false,
+    category: 'sport',
+    recensioni: [
+      { id: 'r15-1', idProdotto: '15', nomeUtente: 'Vincenzo Serra', urlImgUtente: 'https://i.pravatar.cc/150?u=vincenzo', rating: 1, titolo: 'Arrivata difettosa', commento: 'I freni non funzionavano e il telaio era graffiato.', dataRecensione: new Date('2025-11-25') },
+      { id: 'r15-2', idProdotto: '15', nomeUtente: 'Michela Ferri', urlImgUtente: 'https://i.pravatar.cc/150?u=michela', rating: 1, titolo: 'Soldi buttati', commento: 'Pesantissima e il cambio si è rotto dopo due settimane. Pessima.', dataRecensione: new Date('2026-03-01') }
+    ]
+  },
+  {
+    id: '16',
+    name: 'Scarpe Running ProRun',
+    description: 'Scarpe leggere per corsa e allenamento.',
+    price: 89.99,
+    imageUrl: 'https://images.unsplash.com/photo-1562183241-b937e95585b6?w=500&auto=format&fit=crop&q=60',
+    rating: 4.4,
+    reviewCount: 120,
+    inStock: true,
+    category: 'sport',
+    recensioni: [
+      { id: 'r16-1', idProdotto: '16', nomeUtente: 'Pietro Lombardi', urlImgUtente: 'https://i.pravatar.cc/150?u=pietro', rating: 5, titolo: 'Reattive e leggere', commento: 'Ho migliorato i miei tempi. Ammortizzazione eccezionale sull\'asfalto.', dataRecensione: new Date('2026-04-10') },
+      { id: 'r16-2', idProdotto: '16', nomeUtente: 'Serena Colombo', urlImgUtente: 'https://i.pravatar.cc/150?u=serena', rating: 4, titolo: 'Buone scarpe da training', commento: 'Belle esteticamente e comode, attenzione alle taglie, calzano piccole.', dataRecensione: new Date('2026-02-20') }
+    ]
+  },
 
-      // BELLEZZA
-      {
-        id: '21',
-        name: 'Crema Viso Idratante',
-        description: 'Crema nutriente per tutti i tipi di pelle.',
-        price: 22.99,
-        imageUrl: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y3JlYW0lMjB2aXNvfGVufDB8fDB8fHww',
-        rating: 4.4,
-        reviewCount: 70,
-        inStock: true,
-        category: 'bellezza'
-      },
-      {
-        id: '22',
-        name: 'Shampoo Nutriente',
-        description: 'Shampoo delicato per capelli secchi.',
-        price: 9.99,
-        imageUrl: 'https://images.unsplash.com/photo-1701992678972-d5a053ad0fb0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2hhbXBvb3xlbnwwfHwwfHx8MA%3D%3D',
-        rating: 4.2,
-        reviewCount: 55,
-        inStock: true,
-        category: 'bellezza'
-      },
-      {
-        id: '23',
-        name: 'Profumo Elegance',
-        description: 'Fragranza raffinata e duratura.',
-        price: 59.99,
-        imageUrl: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZnVtb3xlbnwwfHwwfHx8MA%3D%3D',
-        rating: 4.6,
-        reviewCount: 90,
-        inStock: true,
-        category: 'bellezza'
-      },
-      {
-        id: '24',
-        name: 'Set Trucco Completo',
-        description: 'Kit makeup con tutto il necessario.',
-        price: 39.99,
-        imageUrl: 'https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c2V0JTIwdHJ1Y2NvfGVufDB8fDB8fHww',
-        rating: 4.3,
-        reviewCount: 65,
-        inStock: false,
-        category: 'bellezza'
-      }
-    ],
+  // LIBRI
+  {
+    id: '17',
+    name: 'Il Mistero della Notte',
+    description: 'Romanzo thriller avvincente.',
+    price: 12.99,
+    imageUrl: 'https://images.unsplash.com/photo-1610703032634-182905cc3d7b?w=500&auto=format&fit=crop&q=60',
+    rating: 4.1,
+    reviewCount: 30,
+    inStock: true,
+    category: 'libri',
+    recensioni: [
+      { id: 'r17-1', idProdotto: '17', nomeUtente: 'Ilaria Villa', urlImgUtente: 'https://i.pravatar.cc/150?u=ilaria', rating: 4, titolo: 'Finale inaspettato', commento: 'Letto tutto d\'un fiato. L\'inizio è lento ma poi decolla.', dataRecensione: new Date('2025-08-30') },
+      { id: 'r17-2', idProdotto: '17', nomeUtente: 'Tommaso Conte', urlImgUtente: 'https://i.pravatar.cc/150?u=tommaso', rating: 5, titolo: 'Coinvolgente', commento: 'La trama è costruita benissimo e i personaggi sono realistici.', dataRecensione: new Date('2026-01-15') }
+    ]
+  },
+  {
+    id: '18',
+    name: 'Guida alla Programmazione',
+    description: 'Manuale pratico per sviluppatori.',
+    price: 29.99,
+    imageUrl: 'https://images.unsplash.com/photo-1565229284535-2cbbe3049123?w=500&auto=format&fit=crop&q=60',
+    rating: 0.7,
+    reviewCount: 60,
+    inStock: true,
+    category: 'libri',
+    recensioni: [
+      { id: 'r18-1', idProdotto: '18', nomeUtente: 'Alessandro Marini', urlImgUtente: 'https://i.pravatar.cc/150?u=alessandro', rating: 1, titolo: 'Pieno di errori', commento: 'Il codice di esempio non compila e ci sono tantissimi errori di battitura.', dataRecensione: new Date('2026-02-10') },
+      { id: 'r18-2', idProdotto: '18', nomeUtente: 'Giulia De Luca', urlImgUtente: 'https://i.pravatar.cc/150?u=giulia2', rating: 1, titolo: 'Obsoleto', commento: 'Tratta versioni di framework ormai vecchie di anni. Inutile.', dataRecensione: new Date('2025-12-05') }
+    ]
+  },
+  {
+    id: '19',
+    name: 'Cucina Italiana Tradizionale',
+    description: 'Ricette autentiche della cucina italiana.',
+    price: 19.99,
+    imageUrl: 'https://images.unsplash.com/photo-1627907228175-2bf846a303b4?w=500&auto=format&fit=crop&q=60',
+    rating: 4.5,
+    reviewCount: 45,
+    inStock: true,
+    category: 'libri',
+    recensioni: [
+      { id: 'r19-1', idProdotto: '19', nomeUtente: 'Nonna Maria', urlImgUtente: 'https://i.pravatar.cc/150?u=nonnamaria', rating: 5, titolo: 'Ricette vere', commento: 'Proprio come le cucinava mia madre. Ottimo libro.', dataRecensione: new Date('2026-03-25') },
+      { id: 'r19-2', idProdotto: '19', nomeUtente: 'Gabriele Sarti', urlImgUtente: 'https://i.pravatar.cc/150?u=gabriele', rating: 4, titolo: 'Bellissime foto', commento: 'Tante ricette interessanti, alcune forse un po\' troppo complesse.', dataRecensione: new Date('2026-01-08') }
+    ]
+  },
+  {
+    id: '20',
+    name: 'Mindfulness Quotidiana',
+    description: 'Libro per migliorare il benessere mentale.',
+    price: 15.99,
+    imageUrl: 'https://images.unsplash.com/photo-1760161627217-3f0124023664?w=500&auto=format&fit=crop&q=60',
+    rating: 3.3,
+    reviewCount: 38,
+    inStock: true,
+    category: 'libri',
+    recensioni: [
+      { id: 'r20-1', idProdotto: '20', nomeUtente: 'Martino Parisi', urlImgUtente: 'https://i.pravatar.cc/150?u=martino', rating: 3, titolo: 'Un po\' ripetitivo', commento: 'I concetti sono buoni ma si dilunga troppo sugli stessi temi.', dataRecensione: new Date('2025-10-10') },
+      { id: 'r20-2', idProdotto: '20', nomeUtente: 'Eleonora Basile', urlImgUtente: 'https://i.pravatar.cc/150?u=eleonora', rating: 4, titolo: 'Utile per lo stress', commento: 'Esercizi pratici molto interessanti da applicare tutti i giorni.', dataRecensione: new Date('2026-04-02') }
+    ]
+  },
+
+  // BELLEZZA
+  {
+    id: '21',
+    name: 'Crema Viso Idratante',
+    description: 'Crema nutriente per tutti i tipi di pelle.',
+    price: 22.99,
+    imageUrl: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=500&auto=format&fit=crop&q=60',
+    rating: 4.4,
+    reviewCount: 70,
+    inStock: true,
+    category: 'bellezza',
+    recensioni: [
+      { id: 'r21-1', idProdotto: '21', nomeUtente: 'Sofia Caruso', urlImgUtente: 'https://i.pravatar.cc/150?u=sofia', rating: 5, titolo: 'Lascia la pelle morbida', commento: 'Si assorbe subito e non unge. Profumo delicato molto piacevole.', dataRecensione: new Date('2026-03-12') },
+      { id: 'r21-2', idProdotto: '21', nomeUtente: 'Alice Fontana', urlImgUtente: 'https://i.pravatar.cc/150?u=alice', rating: 4, titolo: 'Buona per pelli miste', commento: 'Idrata bene ma d\'estate è forse un pelo troppo pesante.', dataRecensione: new Date('2025-07-25') }
+    ]
+  },
+  {
+    id: '22',
+    name: 'Shampoo Nutriente',
+    description: 'Shampoo delicato per capelli secchi.',
+    price: 9.99,
+    imageUrl: 'https://images.unsplash.com/photo-1701992678972-d5a053ad0fb0?w=500&auto=format&fit=crop&q=60',
+    rating: 4.2,
+    reviewCount: 55,
+    inStock: true,
+    category: 'bellezza',
+    recensioni: [
+      { id: 'r22-1', idProdotto: '22', nomeUtente: 'Claudio Bianco', urlImgUtente: 'https://i.pravatar.cc/150?u=claudio', rating: 4, titolo: 'Buon INCI', commento: 'Pulisce bene senza aggredire. Fa un po\' poca schiuma.', dataRecensione: new Date('2026-01-15') },
+      { id: 'r22-2', idProdotto: '22', nomeUtente: 'Beatrice Sala', urlImgUtente: 'https://i.pravatar.cc/150?u=beatrice', rating: 5, titolo: 'Capelli rinati', commento: 'In combo con il balsamo ha curato le mie doppie punte.', dataRecensione: new Date('2026-02-28') }
+    ]
+  },
+  {
+    id: '23',
+    name: 'Profumo Elegance',
+    description: 'Fragranza raffinata e duratura.',
+    price: 59.99,
+    imageUrl: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500&auto=format&fit=crop&q=60',
+    rating: 4.6,
+    reviewCount: 90,
+    inStock: true,
+    category: 'bellezza',
+    recensioni: [
+      { id: 'r23-1', idProdotto: '23', nomeUtente: 'Valerio D\'Amico', urlImgUtente: 'https://i.pravatar.cc/150?u=valerio', rating: 5, titolo: 'Moltissimi complimenti', commento: 'Ogni volta che lo indosso qualcuno mi chiede che profumo sia.', dataRecensione: new Date('2026-04-05') },
+      { id: 'r23-2', idProdotto: '23', nomeUtente: 'Giorgia Rizzi', urlImgUtente: 'https://i.pravatar.cc/150?u=giorgia', rating: 4, titolo: 'Elegante', commento: 'Fragranza floreale non banale. Dura tranquillamente tutta la giornata lavorativa.', dataRecensione: new Date('2025-11-10') }
+    ]
+  },
+  {
+    id: '24',
+    name: 'Set Trucco Completo',
+    description: 'Kit makeup con tutto il necessario.',
+    price: 39.99,
+    imageUrl: 'https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=500&auto=format&fit=crop&q=60',
+    rating: 4.3,
+    reviewCount: 65,
+    inStock: false,
+    category: 'bellezza',
+    recensioni: [
+      { id: 'r24-1', idProdotto: '24', nomeUtente: 'Veronica Coppola', urlImgUtente: 'https://i.pravatar.cc/150?u=veronica', rating: 5, titolo: 'Perfetto da regalare', commento: 'L\'ho regalato a mia sorella e ha apprezzato tantissimo la varietà di colori.', dataRecensione: new Date('2025-12-24') },
+      { id: 'r24-2', idProdotto: '24', nomeUtente: 'Elisa Gatti', urlImgUtente: 'https://i.pravatar.cc/150?u=elisa', rating: 4, titolo: 'Qualità buona', commento: 'Gli ombretti sono ben pigmentati. I pennelli inclusi invece sono così così.', dataRecensione: new Date('2026-03-02') }
+    ]
+  }
+],
     categoria: 'tutti',
     listaDesideriItems: [],
     prodottiCarrello: [],

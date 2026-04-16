@@ -7,10 +7,11 @@ import { MatAnchor, MatIconButton } from "@angular/material/button";
 import { EcommerceStore } from '../../../ecommerce-store';
 import { MatIcon } from "@angular/material/icon";
 import { BottoneToggle } from "../../../components/bottone-toggle/bottone-toggle";
+import { StelleRecensioni } from "../../../components/stelle-recensioni/stelle-recensioni";
 
 @Component({
   selector: 'app-info-prodotto',
-  imports: [TitleCasePipe, StatoDisponibilitaProdotto, CurrencyPipe, SelettoreQuantita, MatAnchor, MatIcon, BottoneToggle, MatIconButton],
+  imports: [TitleCasePipe, StatoDisponibilitaProdotto, CurrencyPipe, SelettoreQuantita, MatAnchor, MatIcon, BottoneToggle, MatIconButton, StelleRecensioni],
   templateUrl: './info-prodotto.html',
   styleUrl: './info-prodotto.css',
 })

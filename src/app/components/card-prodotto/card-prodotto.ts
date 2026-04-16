@@ -5,10 +5,11 @@ import { MatAnchor, MatIconButton } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
 import { EcommerceStore } from '../../ecommerce-store';
 import { RouterLink } from "@angular/router";
+import { StelleRecensioni } from "../stelle-recensioni/stelle-recensioni";
 
 @Component({
   selector: 'app-card-prodotto',
-  imports: [CurrencyPipe, MatAnchor, MatIcon, RouterLink],
+  imports: [CurrencyPipe, MatAnchor, MatIcon, RouterLink, StelleRecensioni],
   templateUrl: './card-prodotto.html',
   styleUrl: './card-prodotto.css',
 })

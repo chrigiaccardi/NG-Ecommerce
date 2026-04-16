@@ -1,0 +1,15 @@
+<!-- Creiamo le stelle per la valutazione del prodotto -->
+ <div class="flex items-center">
+    <!-- in questo div creiamo le stelle di valutazione, se la stella dell'array è vero colora di giallo
+     altrimenti di grigio, questo avviene dall'array di 5 booleani creato nel TS -->
+    <div class="flex items-center mr-2">
+        @for (stella of arrayStelle(); track $index) {
+            <mat-icon class="!text-lg" [inline]="true" [class]="stella ? '!text-yellow-400' : '!text-gray-300'">star</mat-icon>
+        }
+    </div>
+    <!-- in questo span inseriamo, dal parent, il testo da visualizzare con ng-content
+     visto che il componente è riutilizzabile avremo diverso testo nel diversi ambienti -->
+    <span class="text-xm text-gray-500">
+        <ng-content></ng-content>
+    </span>
+ </div>
