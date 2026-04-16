@@ -1,7 +1,10 @@
-<div class="relative bg-white cursor-pointer rounded-xl shadow-lg overflow-hidden flex flex-col h-full">
+<!-- da transition in avanti sono effetti CSS per l'animazione della card al passaggio del mouse -->
+<div class="relative bg-white cursor-pointer rounded-xl shadow-lg overflow-hidden flex flex-col h-full transition-all duration-200 ease-out hover:-translate-y-1 hover:shadowxl ">
 
-    <!-- inseriamo src nelle [] per avere il property binding e prendere l'url da quello che arriva dal singolo prodotto -->
-    <img [src]="prodotto().imageUrl" [alt]="prodotto().name" class="w-full h-[300px] object-cover rounded-t-xl" [routerLink]="['/prodotto', prodotto().id]">
+    <!-- inseriamo src nelle [] per avere il property binding e prendere l'url da quello che arriva dal singolo prodotto.
+     [style.view-transition-name] imposta per la transizione dinamica il nome di cosa deve catturare e dove deve arrivare l'elemento. 
+     La transizione solamente per un solo elemento: genera un nome UNICO per l'elemento che deve volare tra le route-->
+    <img [src]="prodotto().imageUrl" [alt]="prodotto().name" class="w-full h-[300px] object-cover rounded-t-xl" [routerLink]="['/prodotto', prodotto().id]" [style.view-transition-name]="'product-image-' + prodotto().id">
 
 
     <!-- Inseriamo un piccolo toggle con il cuore così che sia il tasto azione per aggiungere il prodotto
@@ -9,7 +12,7 @@
         <ng-content />
 
     <!-- in questo div ci sono tutte le altre info della card -->
-    <div class="p-5 flex flex-col flex-1" [routerLink]="['/prodotto', prodotto().id]">
+    <div class="p-5 flex flex-col flex-1">
         <h3 class="text-lg font-semibold text-gray-900 mb-2 leading-tight"> {{prodotto().name}} </h3>
         <p class="text-sm text-gray-600 mb-4 flex-1 leading-relaxed"> {{prodotto().description}}</p>
 

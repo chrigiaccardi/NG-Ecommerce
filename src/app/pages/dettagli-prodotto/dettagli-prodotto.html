@@ -9,7 +9,8 @@
      e a lato tutte le info con un componente apposito. -->
     @if (store.selezioneProdotto(); as prodotto) {
         <div class="flex gap-8 mb-8">
-            <img [src]="prodotto.imageUrl" alt="{{prodotto.name}}" class="w-[500px] object-cover rounded-lg">
+            <!-- Style.view-transition-name crea un nome UNICO per l'elemento così da effettuare la transizione alla prossima route cliccando sull'immagine -->
+            <img [src]="prodotto.imageUrl" alt="{{prodotto.name}}" class="w-[500px] object-cover rounded-lg" [style.view-transition-name]="'product-image-' + prodotto.id">
             <div class="flex-1">
                 <!-- Creiamo e inseriamo un nuovo componente per le info del prodotto e gli passiamo le info con il binding -->
                  <app-info-prodotto [prodotto]="prodotto" />

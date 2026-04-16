@@ -2,7 +2,7 @@
     <div class="flex items-center gap-4">
 
         <!-- con i property binding src e alt vengono passati dai dati che arrivano dal parent -->
-        <img [src]="prodotto().prodotto.imageUrl" [alt]="prodotto().prodotto.name" class="w-24 h-24 rounded-lg object-cover">
+        <img [src]="prodotto().prodotto.imageUrl" [alt]="prodotto().prodotto.name" class="w-24 h-24 rounded-lg object-cover" [style.view-transition-name]="'product-image-' + prodotto().prodotto.id">
         
         <!-- creiamo un div, così che stia a lato della foto, che contenga il nome del prodotto e sotto il prezzo -->
         <div>
