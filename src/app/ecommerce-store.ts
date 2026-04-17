@@ -430,10 +430,10 @@ export const EcommerceStore = signalStore(
 
   // utilizziamo il metodo withStorageSync per poter automaticamente salvare quello che necessitiamo
   // nel localStorage così che al refresh non si perdano i dati.
-  withStorageSync({
-    key: 'NG-Ecommerce',
-    select: ({listaDesideriItems, prodottiCarrello, user}) => ({listaDesideriItems, prodottiCarrello, user}),
-  }),
+  // withStorageSync({
+  //   key: 'NG-Ecommerce',
+  //   select: ({listaDesideriItems, prodottiCarrello, user}) => ({listaDesideriItems, prodottiCarrello, user}),
+  // }),
     
   // withComputed setta e definisce gli aggiornamenti finali dei signal
   withComputed((store) => ({
