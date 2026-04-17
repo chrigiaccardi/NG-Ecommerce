@@ -20,6 +20,8 @@ import { Ordine } from "./models/ordine";
 // pacchetto ufficiale di estensioni per NgRx Signals Store creato per semplificare lo state
 // management e la sync automatica con backend/storage
 import { withStorageSync } from '@angular-architects/ngrx-toolkit';
+import { AggiungiRecensioniParametri, RecensioneUtente } from "./models/recensione-utente";
+import { RecensioneSingola } from "./pages/dettagli-prodotto/recensione-singola/recensione-singola";
 
 
 export type EcommerceState = {
@@ -675,6 +677,47 @@ export const EcommerceStore = signalStore(
     chiudiDialogRecensione: () => {
       patchState(store, {scriviRecensione: false})
     },
+
+    // aggiungiRecensione inserisce una nuova recensione del prodotto specifico.
+    // creiamo un metodo async così da poter creare latenza e far vedere il bottone di caricamento
+    // in ingresso abbiamo i parametri della nuova recensione
+    aggiungiRecensione: async ({ titolo, commento, rating }: AggiungiRecensioniParametri) => {
+      // impostiamo il caricamento su true
+      patchState(store, { caricamento: true });
+      // individuiamo il prodotto con find che l'id è uguale ad uno nell'array di prodotti
+      const prodotto = store.prodotti().find((p) => p.id === store.selezioneIdProdotto());
+      // se il prodotto non c'è blocca il caricamento
+      if (!prodotto) {
+        patchState(store, { caricamento: false });
+        return
+      }
+      // la nuova recensione avrà questo formato con:
+      // id numero cryptato. id prodotto, nome utente preso dal user loggato o vuoto
+      // img presa dall'user loggato o vuoto, rating, titolo e commento da come 
+      // inserito dal form e infine la data presa automaticamente come nuova data da sistema.
+      const recensione: RecensioneUtente = {
+        id: crypto.randomUUID(),
+        idProdotto: prodotto.id,
+        nomeUtente: store.user()?.name || '',
+        urlImgUtente: store.user()?.imageUrl || '',
+        rating,
+        titolo,
+        commento,
+        dataRecensione: new Date(),
+      };
+
+      const caricamentoProdotti = produce(store.prodotti(), (draft) => {
+        const index = draft.findIndex((p) => p.id === prodotto.id);
+        draft[index].recensioni.push(recensione);
+        draft[index].rating =
+          Math.round(
+            (draft[index].recensioni.reduce((acc, r) => acc + r.rating, 0) /
+              draft[index].recensioni.length) * 10,) / 10;
+        draft[index].reviewCount = draft[index].recensioni.length;
+      })
+    },
+
+    
 
   })
   )

@@ -1,12 +1,43 @@
 <!-- Creiamo un componente dedicato alla scrittura della recensione -->
- <div appPannelloCarrello>
+ <div appPannelloCarrello class="mb-6">
     <h2 class="text-xl font-semibold mb-6">Scrivi una nuova Recensione</h2>
-    <form [[formGroup]="formNuovaRecensione"] (ngSubmit)="salvaRecensione()">
+
+    <!-- Creiamo un form per la nuova recensione -->
+    <form [formGroup]="formNuovaRecensione" >
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+            <!-- Titolo -->
             <mat-form-field>
                 <mat-label>Titolo Recensione</mat-label>
                 <input type="text" formControlName="titolo" placeholder="Titolo Recensione" matInput>
             </mat-form-field>
+            <!-- Selettore del Rating -->
+            <mat-form-field>
+             <mat-select formControlName="rating">
+                @for (opzione of opzioniRating(); track opzione.valore) {
+                    <mat-option [value]="opzione.valore">{{opzione.label}}</mat-option>
+                }
+             </mat-select>
+            </mat-form-field>
+            <!-- TextArea per la descrizione -->
+            <mat-form-field class="col-span-2">
+                <mat-label>Descrizione</mat-label>
+                <textarea 
+                placeholder="Descrivi la tua esperienza con questo prodotto"
+                formControlName="commento"
+                matInput
+                type="text"
+                rows="4" ></textarea>
+            </mat-form-field>
+            <!-- Bottone Invio e Pubblicazione -->
+            <div class="flex gap-4">
+                <button matButton="filled" type="submit" [disabled]="store.caricamento()">
+                    {{store.caricamento() ? 'Invio in Corso...' : 'Pubblica'}}
+                </button>
+                <!-- Bottone chiusura Dialog -->
+                <button matButton="outlined" type="button" (click)="store.chiudiDialogRecensione()">
+                    <mat-icon class="!text-red-500">close</mat-icon>
+                    Chiudi</button>
+            </div>
         </div>
     </form>
  </div>

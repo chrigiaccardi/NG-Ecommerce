@@ -10,3 +10,8 @@ export interface RecensioneUtente {
     commento: string;
     dataRecensione: Date;
 }
+
+// Pick estrae solo alcune proprietà specifiche da un typo già esistente.
+// In questo caso titolo, commento e rating da recensione utente e creiamo una type apposita
+// con i 3
+export type AggiungiRecensioniParametri = Pick<RecensioneUtente, 'titolo' | 'commento' | 'rating'>;
