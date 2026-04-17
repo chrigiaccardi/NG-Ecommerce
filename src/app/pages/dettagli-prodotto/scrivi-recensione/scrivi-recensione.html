@@ -1,0 +1,12 @@
+<!-- Creiamo un componente dedicato alla scrittura della recensione -->
+ <div appPannelloCarrello>
+    <h2 class="text-xl font-semibold mb-6">Scrivi una nuova Recensione</h2>
+    <form [[formGroup]="formNuovaRecensione"] (ngSubmit)="salvaRecensione()">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+            <mat-form-field>
+                <mat-label>Titolo Recensione</mat-label>
+                <input type="text" formControlName="titolo" placeholder="Titolo Recensione" matInput>
+            </mat-form-field>
+        </div>
+    </form>
+ </div>

@@ -28,8 +28,11 @@ export type EcommerceState = {
   listaDesideriItems: Prodotto[];
   prodottiCarrello: ProdottiCarrello[];
   user: User | undefined;
+
   caricamento: boolean;
   selezioneIdProdotto: string | undefined,
+
+  scriviRecensione: boolean;
 
 }
 
@@ -420,6 +423,7 @@ export const EcommerceStore = signalStore(
     user: undefined,
     caricamento: false,
     selezioneIdProdotto: undefined,
+    scriviRecensione: false,
   } as EcommerceState),
 
   // utilizziamo il metodo withStorageSync per poter automaticamente salvare quello che necessitiamo
@@ -663,6 +667,15 @@ export const EcommerceStore = signalStore(
     signOut: () => {
       patchState(store, {user: undefined})
     },
+
+    // apriDialogRecensione imposta il valore a scrivi recensione per aprire il dialog
+    apriDialogRecensione: () => {
+      patchState(store, {scriviRecensione: true})
+    },
+    chiudiDialogRecensione: () => {
+      patchState(store, {scriviRecensione: false})
+    },
+
   })
   )
 )
