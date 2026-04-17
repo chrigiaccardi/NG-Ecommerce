@@ -706,19 +706,35 @@ export const EcommerceStore = signalStore(
         dataRecensione: new Date(),
       };
 
-      const caricamentoProdotti = produce(store.prodotti(), (draft) => {
+      // utilizziamo produce da immer, permette di mutare draft come se fosse mutabile e produce array/ogetti immutabili automaticamente
+      // produce copia l'array store.prodotti() e passa ad una versione mutabile
+      const aggiornamentoProdotti = produce(store.prodotti(), (draft) => {
+        // index trova il prodotto tramite confronto dall'array copia draft -> index = al prodotto selezionato
         const index = draft.findIndex((p) => p.id === prodotto.id);
+        // ora essendo draft mutabile pushamo la recensione dentro l'array recensioni di quel prodotto
         draft[index].recensioni.push(recensione);
+        // ora ricalcoliamo il rating
         draft[index].rating =
+          // Math.round serve per fare l'arrotondamento preciso
           Math.round(
-            (draft[index].recensioni.reduce((acc, r) => acc + r.rating, 0) /
-              draft[index].recensioni.length) * 10,) / 10;
+            // reduce crea un unico numero sommandoli tutti partendo da 0
+            (draft[index].recensioni.reduce((acc, r) => acc + r.rating, 0)
+              // diviso il numero di recensioni che si sono (la lunghezza dell'array recensioni)
+              // la moltiplichiamo per 10 per avere il numero intero con la virgola e lo arrotondiamo
+              // di conseguenza diviso 10 verrà un numero con solo una cifra dietro alla virgola
+              / draft[index].recensioni.length) * 10) / 10;
+        // aggiorniamo il conteggio delle recensioni con il numero della linghezza dell'array quindi di quante recensioni ci sono
         draft[index].reviewCount = draft[index].recensioni.length;
-      })
+      });
+
+      // essendo che la funzione è async utilizziamo l'await per farla partire in ritardo
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // aggiorniamo i vari parametri come caricamento false per cambiare il bottone, aggiorniamo l'array
+      // dei prodotti così che abbia le nuove recensioni e scrivi recensione false per chiudere il pannello
+      patchState(store, { caricamento: false, prodotti: aggiornamentoProdotti, scriviRecensione: false });
+      toaster.success('La recensione è stata aggiunta con successo');
     },
-
-    
-
   })
   )
 )

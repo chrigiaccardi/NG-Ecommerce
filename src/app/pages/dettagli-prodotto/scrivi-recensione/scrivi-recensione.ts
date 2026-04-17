@@ -9,6 +9,7 @@ import { OpzioniItem } from '../../../models/opzioni-item';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import { MatIcon } from "@angular/material/icon";
+import { AggiungiRecensioniParametri } from '../../../models/recensione-utente';
 
 @Component({
   selector: 'app-scrivi-recensione',
@@ -41,6 +42,15 @@ export class ScriviRecensione {
 
   // metodo per il salvataggio delle recensioni
   salvaRecensione() {
+    // se il form non è valido ritorna
+    if (!this.formNuovaRecensione.valid) {
+      // utilizziamo markallastouched per segnare che tutti i controlli del form sono stati toccati,
+      // se no non vengono dati errori di validazione
+      this.formNuovaRecensione.markAllAsTouched();
+      return;
+    }
 
+    const { titolo, commento, rating } = this.formNuovaRecensione.value;
+    this.store.aggiungiRecensione({ titolo, commento, rating } as unknown as AggiungiRecensioniParametri);
   }
 }

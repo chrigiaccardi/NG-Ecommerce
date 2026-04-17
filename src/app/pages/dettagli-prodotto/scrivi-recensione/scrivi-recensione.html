@@ -30,7 +30,7 @@
             </mat-form-field>
             <!-- Bottone Invio e Pubblicazione -->
             <div class="flex gap-4">
-                <button matButton="filled" type="submit" [disabled]="store.caricamento()">
+                <button matButton="filled" type="submit" [disabled]="store.caricamento()" (click)="salvaRecensione()">
                     {{store.caricamento() ? 'Invio in Corso...' : 'Pubblica'}}
                 </button>
                 <!-- Bottone chiusura Dialog -->
