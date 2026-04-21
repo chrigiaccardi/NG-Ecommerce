@@ -40,7 +40,7 @@ export class SeoManager {
     this.meta.updateTag({ name: 'description', content: seoData.descrizione });
 
     // Impostazione canonical link, se siamo SSR prende link da header, se siamo CSR lo prende da window (browser)
-    let origine = '';
+    let origin = '';
     // se richiesta esiste siamo nel SSR, se il servizio gira nel browser allora è undefined/falsy
     if (this.richiesta) {
       // confermiamo la tipologia Headers | undefined per confermare a TypeScript
