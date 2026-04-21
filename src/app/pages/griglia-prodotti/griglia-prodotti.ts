@@ -25,9 +25,11 @@ export default class GrigliaProdotti {
   categorie = signal<string[]>(['tutti', 'elettronica', 'abbigliamento', 'casa', 'sport', 'libri', 'bellezza'])
   // iniettiamo lo store per poter utilizzare i suoi dati
   store = inject(EcommerceStore)
+  
   // Il constructor rende il metodo subito disponibile e pronto all'utilizzo
   constructor() {
-    this.store.setCategoria(this.categoria)
+    this.store.setCategoria(this.categoria);
+    this.store.setListaProdottiSeoTags(this.categoria)
   }
 
   aggiungiAlCarrello(prodotto:Prodotto) {

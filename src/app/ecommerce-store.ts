@@ -22,6 +22,7 @@ import { Ordine } from "./models/ordine";
 import { withStorageSync } from '@angular-architects/ngrx-toolkit';
 import { AggiungiRecensioniParametri, RecensioneUtente } from "./models/recensione-utente";
 import { RecensioneSingola } from "./pages/dettagli-prodotto/recensione-singola/recensione-singola";
+import { SeoManager } from "./services/seo-manager";
 
 
 export type EcommerceState = {
@@ -466,7 +467,7 @@ export const EcommerceStore = signalStore(
   // con withMethod creiamo dei metodi per aggiornare gli stati, in questo caso set categoria accoglie in input una categoria string
   // e la va a settare nello store aggiornando solamente lo stato categoria.
   // signalMethod restituisce un signal al posto di void, utile per operazioni asincrone con reattività.
-  withMethods((store, toaster = inject(Toaster), matDialog = inject(MatDialog), router = inject(Router)) => ({
+  withMethods((store, toaster = inject(Toaster), matDialog = inject(MatDialog), router = inject(Router), seoManager = inject(SeoManager)) => ({
 
     // setta la categoria per la route
     setCategoria: signalMethod<string>((categoria: string) => {
@@ -476,6 +477,16 @@ export const EcommerceStore = signalStore(
     // setta ID prodotto per la route
     setIdProdotto: signalMethod<string>((idProdotto: string) => {
       patchState(store, {selezioneIdProdotto: idProdotto})
+    }),
+
+    //
+    setListaProdottiSeoTags: signalMethod<string | undefined>((categoria) => {
+      const nomeCategoria = categoria ? categoria.charAt(0).toUpperCase() + categoria.slice(1) : 'tutti i prodotti';
+      const descrizione = categoria ? `Visualizza i prodotti di ${categoria}`: 'Visualizza tutti i prodotti';
+      seoManager.caricamentoSeoTags({
+        titolo: nomeCategoria,
+        descrizione,
+      })
     }),
 
     // Aggiunge un prodotto alla lista desideri
