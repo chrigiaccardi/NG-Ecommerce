@@ -1,3 +1,10 @@
 [build]
 command = "npm run build:ssr"
 publish = "dist/ng-ecomm/browser"
+functions = "netlify/functions"
+
+[[redirects]]
+from = "/*"
+to = "/.netlify/functions/ssr"
+status = 200
+force = false
