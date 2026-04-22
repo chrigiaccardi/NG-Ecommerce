@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:ng-ecomm": "node dist/ng-ecomm/server/server.mjs"
+    "serve:ssr:ng-ecomm": "node dist/ng-ecomm/server/server.mjs",
+    "build:ssr": "ng build && ng run ng-ecomm:server"
   },
   "private": true,
   "packageManager": "npm@11.8.0",
