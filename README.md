@@ -19,9 +19,9 @@ E-commerce sviluppato con **Angular 21** come esercitazione avanzata.
 | Categoria | Tecnologia |
 |-----------|-----------|
 | **Framework** | Angular 21, TypeScript |
-| **State** | NgRx Signals, Immer |
+| **Stato** | NgRx Signals, Immer |
 | **Rendering** | @angular/ssr, Prerendering |
-| **Styling** | Tailwind CSS, Angular Material |
+| **Stile** | Tailwind CSS, Angular Material |
 | **Notifiche** | Hot Toast |
 | **Deploy** | Netlify (SSR) |
 
@@ -108,6 +108,7 @@ src/
 ├── material-theme.scss
 ├── server.ts
 └── styles.css
+```
 
 ---
 
