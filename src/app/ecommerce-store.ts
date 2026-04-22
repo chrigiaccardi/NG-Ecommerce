@@ -464,12 +464,12 @@ export const EcommerceStore = signalStore(
 
    
   
-  // con withMethod creiamo dei metodi per aggiornare gli stati, in questo caso set categoria accoglie in input una categoria string
-  // e la va a settare nello store aggiornando solamente lo stato categoria.
-  // signalMethod restituisce un signal al posto di void, utile per operazioni asincrone con reattività.
+  // con withMethod creiamo dei metodi per aggiornare gli stati,
+ 
   withMethods((store, toaster = inject(Toaster), matDialog = inject(MatDialog), router = inject(Router), seoManager = inject(SeoManager)) => ({
 
-    // setta la categoria per la route
+    // in questo caso set categoria accoglie in input una categoria string e la va a settare nello store aggiornando solamente lo stato categoria.
+    // signalMethod restituisce un signal al posto di void, utile per operazioni asincrone con reattività.
     setCategoria: signalMethod<string>((categoria: string) => {
       patchState(store, { categoria })
     }),
@@ -479,13 +479,29 @@ export const EcommerceStore = signalStore(
       patchState(store, {selezioneIdProdotto: idProdotto})
     }),
 
-    //
+    // setta i SeoTags dinamicamente per la categoria di prodotto
     setListaProdottiSeoTags: signalMethod<string | undefined>((categoria) => {
+      // Trasformazione NomeCategoria con Maiuscola Grande, charAt seleziona il 1o carattere 0 e lo mette grande .upperCase
+      // concatenazione + con il resto del nome partendo dal 2o carattere quindi 1 -> E + lettronica
       const nomeCategoria = categoria ? categoria.charAt(0).toUpperCase() + categoria.slice(1) : 'tutti i prodotti';
+      // descrizione di nuovo ternario se true dinamico con il nome categoria se no default.
       const descrizione = categoria ? `Visualizza i prodotti di ${categoria}`: 'Visualizza tutti i prodotti';
       seoManager.caricamentoSeoTags({
         titolo: nomeCategoria,
         descrizione,
+      })
+    }),
+
+    // Imposta i Seo Tags per Ogni Singolo Prodotto quando entriamo nei dettagli
+    setSeoTagsProdotti: signalMethod<Prodotto | undefined>((prodotto) => {
+      // se il prodotto in ingresso è falso ritorna
+      if (!prodotto) return;
+      // Se vero carica i dati del prodotto nei MetaTags
+      seoManager.caricamentoSeoTags({
+        titolo: prodotto.name,
+        descrizione: prodotto.description,
+        image: prodotto.imageUrl,
+        tipo: 'prodotto'
       })
     }),
 

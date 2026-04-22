@@ -17,8 +17,10 @@ export default class DettagliProdotto {
   // idProdotto in input con l'input binding impostato nel config inserisce direttamente nella route l'id del prodotto 
   idProdotto = input.required<string>();
 
+  // Carichiamo i seguenti metodi nel costructor così che partano immediatamente non appena è tutto caricato
   constructor() {
     this.store.setIdProdotto(this.idProdotto)
+    this.store.setSeoTagsProdotti(this.store.selezioneProdotto)
   }
 
   // creiamo routeIniziale per gestire con un signal computed la ruote da dove arriviamo, se da una categoria specifica
