@@ -23,7 +23,7 @@ export class Header {
 
   toggleSidenav() {
     this.sidenavAperta = !this.sidenavAperta;
-    this.sidenavToggle.emit()
+    this.sidenavToggle.emit();
   }
 
 }
