@@ -33,7 +33,7 @@
             "server": "src/main.server.ts",
             "outputMode": "server",
             "security": {
-              "allowedHosts": ["localhost", "127.0.0.1", "localhost:4000"]
+              "allowedHosts": ["localhost", "127.0.0.1", "localhost:4000", "ngecomm.netlify.app"]
             },
             "ssr": {
               "entry": "src/server.ts"
