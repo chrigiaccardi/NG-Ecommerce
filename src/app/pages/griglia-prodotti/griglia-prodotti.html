@@ -1,7 +1,7 @@
 <!-- creiamo la sidenav per la selezione delle categorie da visualizzare -->
 <mat-sidenav-container>
     <!-- sidenav crea di fianco (side, sx) o sopra (over) lo spazio per i filtri opened per aperta (true) o chiusa (false)-->
-    <mat-sidenav mode="side" [opened]="sidenav.sidenavAperta">
+    <mat-sidenav [mode]="larghezzaSchermo() ? 'over' : 'side'" [opened]="sidenav.sidenavAperta">
         <!-- creiamo la lista selezionabile delle categorie per filtrare i prodotti -->
         <div class="p-6">
             <h2 class="text-lg text-gray-900">Categorie</h2>
@@ -10,14 +10,15 @@
                 <!-- per ogni categoria nell'array categorie creiamo un elemento list item selezionabile e cliccabile -->
                 @for (cat of categorie(); track cat) {
 
-                    <!-- utilizziamo routerLink per collegare ogni list-item ad una route specifica dentro l'array categorie.
+                <!-- utilizziamo routerLink per collegare ogni list-item ad una route specifica dentro l'array categorie.
                      Activated inserisce la selezione della categoria colorando lo sfondo e indicando qual'è attivata-->
-                    <mat-list-item [activated]="cat === categoria()" class="my-2" [routerLink]="['/prodotti', cat]">
-                        
-                        <!-- titleCase è una pipe che importiamo per far si che la 1a lettera sia maiuscola.
+                <mat-list-item [activated]="cat === categoria()" class="my-2" [routerLink]="['/prodotti', cat]">
+
+                    <!-- titleCase è una pipe che importiamo per far si che la 1a lettera sia maiuscola.
                          Inseriamo un conditional binding per dire che se la cat è uguale a categoria allora testo bianco altrimenti null -->
-                        <span matListItemTitle class="font-medium" [class]="cat === categoria() ? '!text-white': null "> {{cat | titlecase}} </span>
-                    </mat-list-item>
+                    <span matListItemTitle class="font-medium" [class]="cat === categoria() ? '!text-white': null ">
+                        {{cat | titlecase}} </span>
+                </mat-list-item>
                 }
             </mat-nav-list>
         </div>
@@ -25,24 +26,28 @@
 
     <!-- sidenav- content il contenuto da visualizzare integralmente a dx-->
     <mat-sidenav-content lass="bg-gray-100 p-6 h-full">
-        <h1 class="text-2xl font-bold text-gray-900 m-2"> {{categoria() | titlecase}} </h1>
-        <p class="text-base text-gray-600 m-2"> {{store.prodottiFiltrati().length}} prodotti trovati</p>
-        
-        <!-- utilizziamo responsive-grid che è già stato impostato nel file generico dello style -->
-        <div class="responsive-grid">
+        <div class="p-6">
 
-            <!-- creiamo un ciclo for che per ogni prodotto dei prodotti filtrati crei la card
-        e che tenga traccia tramite l'id del prodotto singolo -->
-            @for (prodotto of store.prodottiFiltrati(); track prodotto.id) {
+            <h1 class="text-2xl font-bold text-gray-900 m-2"> {{categoria() | titlecase}} </h1>
+            <p class="text-base text-gray-600 m-2"> {{store.prodottiFiltrati().length}} prodotti trovati</p>
 
-            <!-- creiamo un componente separato riutilizzabile per la card e con il property binding
-             introduciamo i dati del prodotto nell'input prodotto creato in card-prodotto.
-             Riceviamo l'evento in emissione da app-card-prodotto per riceverlo nel metodo aggiungiAlCarrello -->
-            <app-card-prodotto [prodotto]="prodotto">
-                                    <!-- per vere bottoni toggle differenti solo nell'icona creiamo un componente a parte e gli passiamo i prodotti -->
-                    <app-bottone-toggle class="!absolute z-10 top-3 right-3" [prodotto]="prodotto" [style.view-transition-name]="'wishlist-button-' + prodotto.id"/>
-            </app-card-prodotto>
-            }
+            <!-- utilizziamo responsive-grid che è già stato impostato nel file generico dello style -->
+            <div class="responsive-grid">
+
+                <!-- creiamo un ciclo for che per ogni prodotto dei prodotti filtrati crei la card
+                    e che tenga traccia tramite l'id del prodotto singolo -->
+                @for (prodotto of store.prodottiFiltrati(); track prodotto.id) {
+
+                <!-- creiamo un componente separato riutilizzabile per la card e con il property binding
+                    introduciamo i dati del prodotto nell'input prodotto creato in card-prodotto.
+                    Riceviamo l'evento in emissione da app-card-prodotto per riceverlo nel metodo aggiungiAlCarrello -->
+                <app-card-prodotto [prodotto]="prodotto">
+                    <!-- per vere bottoni toggle differenti solo nell'icona creiamo un componente a parte e gli passiamo i prodotti -->
+                    <app-bottone-toggle class="!absolute z-10 top-3 right-3" [prodotto]="prodotto"
+                        [style.view-transition-name]="'wishlist-button-' + prodotto.id" />
+                </app-card-prodotto>
+                }
+            </div>
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
