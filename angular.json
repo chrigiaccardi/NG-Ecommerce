@@ -77,21 +77,7 @@
         },
         "test": {
           "builder": "@angular/build:unit-test"
-        },
-        "server": {
-  "builder": "@angular/build:application-prerender",
-  "options": {
-    "outputPath": {
-      "base": "dist/ng-ecomm",
-      "browser": "browser"
-    },
-    "main": "src/main.server.ts",
-    "tsConfig": "tsconfig.server.json",
-    "security": {
-      "allowedHosts": ["localhost", "127.0.0.1"]
-    }
-  }
-}
+        }
       }
     }
   }
