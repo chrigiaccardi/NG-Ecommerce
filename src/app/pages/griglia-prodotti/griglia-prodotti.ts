@@ -1,5 +1,4 @@
-import { Component, computed, inject, input, signal } from '@angular/core';
-import { Prodotto } from '../../models/prodotto';
+import { Component, inject, Input, input, signal } from '@angular/core';
 import { CardProdotto } from "../../components/card-prodotto/card-prodotto";
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
@@ -32,7 +31,6 @@ export default class GrigliaProdotti {
     this.store.setListaProdottiSeoTags(this.categoria)
   }
 
-  aggiungiAlCarrello(prodotto:Prodotto) {
-    
-  }
+  // sidenav aperta in input 
+  @Input() isOpen = false
 }

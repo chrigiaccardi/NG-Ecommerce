@@ -3,6 +3,9 @@
 
     <!-- // il div racchiude con un max di 1200px, full width, modalità flex con spazio uguale tra gli item con item centrati   -->
     <div class="max-w-[1200px] mx-auto w-full flex items-center justify-between">
+        <button mat-icon-button (click)="toggleSidenav()">
+            <mat-icon>{{sidenavAperta ? 'close' : 'menu'}}</mat-icon>
+        </button>
         <button matButton [routerLink]="['']" class="cursor-pointer">{{ titolo() }}</button>
         <app-azioni-header />
     </div>
