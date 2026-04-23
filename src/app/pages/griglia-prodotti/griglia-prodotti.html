@@ -1,7 +1,7 @@
 <!-- creiamo la sidenav per la selezione delle categorie da visualizzare -->
 <mat-sidenav-container>
     <!-- sidenav crea di fianco (side, sx) o sopra (over) lo spazio per i filtri opened per aperta (true) o chiusa (false)-->
-    <mat-sidenav mode="side" [opened]="isOpen">
+    <mat-sidenav mode="side" [opened]="sidenav.sidenavAperta">
         <!-- creiamo la lista selezionabile delle categorie per filtrare i prodotti -->
         <div class="p-6">
             <h2 class="text-lg text-gray-900">Categorie</h2>

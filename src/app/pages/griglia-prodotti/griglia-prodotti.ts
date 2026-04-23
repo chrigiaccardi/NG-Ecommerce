@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
 import { TitleCasePipe } from '@angular/common';
 import { EcommerceStore } from '../../ecommerce-store';
 import { BottoneToggle } from "../../components/bottone-toggle/bottone-toggle";
+import { BtnSidenav } from '../../services/btn-sidenav';
 
 
 @Component({
@@ -30,7 +31,7 @@ export default class GrigliaProdotti {
     this.store.setCategoria(this.categoria);
     this.store.setListaProdottiSeoTags(this.categoria)
   }
-
-  // sidenav aperta in input 
-  @Input() isOpen = false
+  
+  // import btn-sidenav service
+  sidenav = inject(BtnSidenav)
 }
