@@ -4,7 +4,7 @@ publish = "dist/ng-ecomm/browser"
 functions = "netlify/functions"
 
 [[redirects]]
-from = "/*"
-to = "/.netlify/functions/ssr"
-status = 200
-force = false
+from = "https://www.ngecomm.netlify.app/*"
+to = "https://ngecomm.netlify.app/:splat"
+status = 301
+force = true
